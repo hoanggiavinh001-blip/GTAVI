@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>GTA VI FANMADE</title>
+<title>GTA VI FANMADE v0.7</title>
 
 <script type="importmap">
 {
@@ -15,2211 +15,933 @@
 </script>
 
 <style>
-* {
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-body {
-    overflow:hidden;
-    background:#87ceeb;
-    font-family:Arial,sans-serif;
-    touch-action:none;
-}
-
-#game {
-    position:fixed;
-    inset:0;
-}
-
-canvas {
-    display:block;
-}
-
-#topUI {
-    position:fixed;
-    top:12px;
-    left:12px;
-    color:white;
-    text-shadow:2px 2px 4px black;
-    z-index:10;
-    pointer-events:none;
-}
-
-#title {
-    color:#ffcf48;
-    font-size:22px;
-    font-weight:bold;
-}
-
-#money {
-    font-size:19px;
-    margin-top:7px;
-}
-
-#location {
-    position:fixed;
-    top:12px;
-    right:12px;
-    color:white;
-    background:#182c3ddd;
-    padding:10px;
-    border-radius:9px;
-    z-index:10;
-}
-
-#minimap {
-    position:fixed;
-    top:65px;
-    right:12px;
-    width:130px;
-    height:130px;
-    background:#263d35;
-    border:3px solid white;
-    border-radius:12px;
-    z-index:10;
-}
-
-#mission {
-    position:fixed;
-    top:215px;
-    left:12px;
-    width:180px;
-    padding:12px;
-    background:#142735dd;
-    color:white;
-    border-radius:10px;
-    font-size:12px;
-    z-index:10;
-}
-
-#mission button,
-#shop button,
-#saveMenu button {
-    width:100%;
-    border:0;
-    border-radius:7px;
-    padding:9px;
-    margin-top:8px;
-    background:#ffbf38;
-    font-weight:bold;
-}
-
-#joystick {
-    position:fixed;
-    bottom:22px;
-    left:18px;
-    width:140px;
-    height:140px;
-    z-index:20;
-}
-
-#joyBase {
-    position:absolute;
-    inset:7px;
-    border-radius:50%;
-    background:#263d49aa;
-    border:3px solid #ffffff88;
-}
-
-#joyKnob {
-    position:absolute;
-    width:55px;
-    height:55px;
-    border-radius:50%;
-    background:#ffffffdd;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-}
-
-#buttons {
-    position:fixed;
-    right:15px;
-    bottom:25px;
-    display:grid;
-    grid-template-columns:65px 65px;
-    gap:10px;
-    z-index:20;
-}
-
-.gameBtn {
-    height:55px;
-    border:2px solid white;
-    border-radius:13px;
-    background:#172c3ddd;
-    color:white;
-    font-weight:bold;
-    touch-action:none;
-}
-
-#message {
-    position:fixed;
-    top:45%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    background:#111e;
-    color:white;
-    padding:13px 22px;
-    border-radius:10px;
-    display:none;
-    z-index:50;
-    text-align:center;
-}
-
-#shop,
-#saveMenu {
-    display:none;
-    position:fixed;
-    width:260px;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    padding:20px;
-    background:#152b3af5;
-    color:white;
-    border-radius:15px;
-    z-index:60;
-    text-align:center;
-}
-
-#weather {
-    position:fixed;
-    top:205px;
-    right:15px;
-    color:white;
-    text-shadow:1px 1px 3px black;
-    z-index:10;
-}
-
-#instructions {
-    position:fixed;
-    bottom:175px;
-    left:12px;
-    color:white;
-    background:#172c3dcc;
-    padding:9px;
-    border-radius:8px;
-    font-size:11px;
-    z-index:10;
-}
-
-@media(min-width:800px) {
-    #joystick {
-        width:150px;
-        height:150px;
-    }
-
-    #instructions {
-        bottom:15px;
-        left:180px;
-    }
+*{box-sizing:border-box;margin:0;padding:0}
+body{overflow:hidden;background:#87ceeb;font-family:Arial,sans-serif;touch-action:none}
+#game{position:fixed;inset:0}
+canvas{display:block}
+#topUI{position:fixed;top:12px;left:12px;color:white;text-shadow:2px 2px 4px black;z-index:10;pointer-events:none}
+#title{color:#ffcf48;font-size:22px;font-weight:bold}
+#money{font-size:19px;margin-top:7px}
+#location{position:fixed;top:12px;right:12px;color:white;background:#182c3ddd;padding:10px;border-radius:9px;z-index:10}
+#minimap{position:fixed;top:65px;right:12px;width:130px;height:130px;background:#263d35;border:3px solid white;border-radius:12px;z-index:10}
+#mission{position:fixed;top:215px;left:12px;width:180px;padding:12px;background:#142735dd;color:white;border-radius:10px;font-size:12px;z-index:10}
+#mission button,#shop button,#saveMenu button{width:100%;border:0;border-radius:7px;padding:9px;margin-top:8px;background:#ffbf38;font-weight:bold}
+#joystick{position:fixed;bottom:22px;left:18px;width:140px;height:140px;z-index:20}
+#joyBase{position:absolute;inset:7px;border-radius:50%;background:#263d49aa;border:3px solid #ffffff88}
+#joyKnob{position:absolute;width:55px;height:55px;border-radius:50%;background:#ffffffdd;left:50%;top:50%;transform:translate(-50%,-50%)}
+#buttons{position:fixed;right:15px;bottom:25px;display:grid;grid-template-columns:65px 65px;gap:10px;z-index:20}
+.gameBtn{height:55px;border:2px solid white;border-radius:13px;background:#172c3ddd;color:white;font-weight:bold;touch-action:none}
+#message{position:fixed;top:45%;left:50%;transform:translate(-50%,-50%);background:#111e;color:white;padding:13px 22px;border-radius:10px;display:none;z-index:50;text-align:center}
+#shop,#saveMenu{display:none;position:fixed;width:260px;top:50%;left:50%;transform:translate(-50%,-50%);padding:20px;background:#152b3af5;color:white;border-radius:15px;z-index:60;text-align:center}
+#weather{position:fixed;top:205px;right:15px;color:white;text-shadow:1px 1px 3px black;z-index:10}
+#instructions{position:fixed;bottom:175px;left:12px;color:white;background:#172c3dcc;padding:9px;border-radius:8px;font-size:11px;z-index:10}
+@media(max-height:650px) and (max-width:799px){
+#mission{top:150px;width:165px;padding:9px}
+#weather{top:155px}
+#minimap{width:105px;height:105px}
+#joystick{width:120px;height:120px;bottom:12px}
+#buttons{bottom:12px;gap:7px;grid-template-columns:60px 60px}
+.gameBtn{height:48px}
+#instructions{bottom:140px;font-size:10px}
 }
 </style>
 </head>
 
 <body>
-
 <div id="game"></div>
 
 <div id="topUI">
-    <div id="title">GTA VI FANMADE</div>
-    <div id="money">$500</div>
+<div id="title">GTA VI FANMADE v0.7</div>
+<div id="money">$500</div>
 </div>
 
 <div id="location">VICE CITY</div>
-
 <canvas id="minimap" width="260" height="260"></canvas>
 
 <div id="mission">
-    <b>VICE CITY MISSIONS</b>
-    <p id="missionName" style="margin-top:8px">
-        Chưa có nhiệm vụ
-    </p>
-    <p id="missionReward" style="margin-top:5px">
-        Reward: $0
-    </p>
-    <button id="startMission">NHẬN NHIỆM VỤ</button>
+<b>VICE CITY MISSIONS</b>
+<p id="missionName" style="margin-top:8px">Chưa có nhiệm vụ</p>
+<p id="missionReward" style="margin-top:5px">Reward: $0</p>
+<button id="startMission">NHẬN NHIỆM VỤ</button>
 </div>
 
 <div id="weather">☀️ SUNNY</div>
 
+<button id="timeButton" class="gameBtn" style="position:fixed;top:250px;right:15px;z-index:15;padding:8px 10px;height:auto">☀️ DAY</button>
+
 <div id="instructions">
-    WASD: Di chuyển<br>
-    SHIFT: Chạy<br>
-    E: Lên / xuống xe<br>
-    SPACE: Nhảy<br>
-    Vuốt màn hình: Xoay camera
+WASD: Di chuyển<br>
+SHIFT: Chạy<br>
+E: Lên / xuống xe<br>
+SPACE: Nhảy<br>
+Vuốt màn hình: Xoay camera
 </div>
 
 <div id="joystick">
-    <div id="joyBase">
-        <div id="joyKnob"></div>
-    </div>
+<div id="joyBase"><div id="joyKnob"></div></div>
 </div>
 
 <div id="buttons">
-    <button class="gameBtn" id="jump">JUMP</button>
-    <button class="gameBtn" id="run">RUN</button>
-    <button class="gameBtn" id="carButton">CAR</button>
-    <button class="gameBtn" id="shopButton">SHOP</button>
-    <button class="gameBtn" id="saveButton">SAVE</button>
-    <button class="gameBtn" id="loadButton">LOAD</button>
+<button class="gameBtn" id="jump">JUMP</button>
+<button class="gameBtn" id="run">RUN</button>
+<button class="gameBtn" id="carButton">CAR</button>
+<button class="gameBtn" id="shopButton">SHOP</button>
+<button class="gameBtn" id="saveButton">SAVE</button>
+<button class="gameBtn" id="loadButton">LOAD</button>
 </div>
 
 <div id="message"></div>
 
 <div id="shop">
-    <h2>VICE CITY SHOP</h2>
-    <p id="shopMoney">$500</p>
-    <button id="buyHealth">HEALTH - $50</button>
-    <button id="buyOutfit">OUTFIT - $100</button>
-    <button id="closeShop">CLOSE</button>
+<h2>VICE CITY SHOP</h2>
+<p id="shopMoney">$500</p>
+<button id="buyHealth">HEALTH - $50</button>
+<button id="buyOutfit">OUTFIT - $100</button>
+<button id="closeShop">CLOSE</button>
 </div>
 
 <div id="saveMenu">
-    <h2>GAME SAVED</h2>
-    <p>Tiến trình đã được lưu.</p>
-    <button id="closeSave">CLOSE</button>
+<h2>GAME SAVED</h2>
+<p>Tiến trình đã được lưu.</p>
+<button id="closeSave">CLOSE</button>
 </div>
 
 <script type="module">
-
 import * as THREE from 'three';
-import { GLTFLoader } from
-'three/addons/loaders/GLTFLoader.js';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {clone as cloneSkeleton} from 'three/addons/utils/SkeletonUtils.js';
 
+const scene=new THREE.Scene();
+scene.background=new THREE.Color(0x91cce8);
+scene.fog=new THREE.Fog(0x91cce8,150,700);
 
-// ========================================
-// BASIC SETTINGS
-// ========================================
+const camera=new THREE.PerspectiveCamera(65,innerWidth/innerHeight,.1,1200);
+let renderer;
 
-const scene = new THREE.Scene();
+try{
+renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:"high-performance"});
+}catch(error){
+document.getElementById("message").style.display="block";
+document.getElementById("message").textContent="Thiết bị không hỗ trợ WebGL.";
+throw error;
+}
 
-scene.background = new THREE.Color(0x91cce8);
-
-scene.fog = new THREE.Fog(
-    0x91cce8,
-    150,
-    700
-);
-
-const camera = new THREE.PerspectiveCamera(
-    65,
-    innerWidth / innerHeight,
-    0.1,
-    1200
-);
-
-const renderer = new THREE.WebGLRenderer({
-    antialias:true
-});
-
+renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.35));
 renderer.setSize(innerWidth,innerHeight);
+renderer.outputColorSpace=THREE.SRGBColorSpace;
+renderer.shadowMap.enabled=true;
+renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+document.getElementById("game").appendChild(renderer.domElement);
 
-renderer.setPixelRatio(
-    Math.min(devicePixelRatio,1.5)
-);
+scene.add(new THREE.HemisphereLight(0xffffff,0x526b42,2));
 
-renderer.shadowMap.enabled = true;
-
-renderer.shadowMap.type =
-    THREE.PCFSoftShadowMap;
-
-document.getElementById("game").appendChild(
-    renderer.domElement
-);
-
-
-// ========================================
-// LIGHTS
-// ========================================
-
-scene.add(
-    new THREE.HemisphereLight(
-        0xffffff,
-        0x526b42,
-        2
-    )
-);
-
-const sun = new THREE.DirectionalLight(
-    0xffffff,
-    2
-);
-
+const sun=new THREE.DirectionalLight(0xffffff,2);
 sun.position.set(100,150,100);
-
-sun.castShadow = true;
-
+sun.castShadow=true;
 sun.shadow.mapSize.set(1024,1024);
-
 scene.add(sun);
 
-
-// ========================================
-// MATERIALS
-// ========================================
-
-const loader = new GLTFLoader();
-
-const groundMat = new THREE.MeshStandardMaterial({
-    color:0x54864b
-});
-
-const roadMat = new THREE.MeshStandardMaterial({
-    color:0x303438
-});
-
-const whiteMat = new THREE.MeshBasicMaterial({
-    color:0xffffff
-});
-
-const buildings = [];
-
-
-// ========================================
-// GROUND
-// ========================================
-
-const ground = new THREE.Mesh(
-    new THREE.PlaneGeometry(1100,1100),
-    groundMat
+const loader=new GLTFLoader();
+const buildings=[];
+const ground=new THREE.Mesh(
+new THREE.PlaneGeometry(1100,1100),
+new THREE.MeshStandardMaterial({color:0x54864b})
 );
-
-ground.rotation.x = -Math.PI/2;
-
-ground.receiveShadow = true;
-
+ground.rotation.x=-Math.PI/2;
+ground.receiveShadow=true;
 scene.add(ground);
 
-
-// ========================================
-// ROADS
-// ========================================
-
-function road(x,z,w,d) {
-
-    const mesh = new THREE.Mesh(
-        new THREE.BoxGeometry(w,0.12,d),
-        roadMat
-    );
-
-    mesh.position.set(x,0,z);
-
-    scene.add(mesh);
-
+function road(x,z,w,d){
+const mesh=new THREE.Mesh(
+new THREE.BoxGeometry(w,.12,d),
+new THREE.MeshStandardMaterial({color:0x303438})
+);
+mesh.position.set(x,0,z);
+scene.add(mesh);
 }
 
-for(let i=-500;i<=500;i+=100) {
-
-    road(i,0,23,1100);
-
-    road(0,i,1100,23);
-
+for(let i=-500;i<=500;i+=100){
+road(i,0,23,1100);
+road(0,i,1100,23);
 }
 
-
-// Road markings
-
-for(let i=-500;i<=500;i+=12) {
-
-    const line = new THREE.Mesh(
-        new THREE.BoxGeometry(0.25,0.03,4),
-        whiteMat
-    );
-
-    line.position.set(i,0.08,0);
-
-    scene.add(line);
-
+for(let i=-500;i<=500;i+=12){
+const line=new THREE.Mesh(
+new THREE.BoxGeometry(.25,.03,4),
+new THREE.MeshBasicMaterial({color:0xffffff})
+);
+line.position.set(i,.08,0);
+scene.add(line);
 }
 
+const buildingColors=[0xd9c4a5,0xc5d4dc,0xe2d4c5,0xa9b9c6,0xd7b5a1,0x9daea0];
 
-// ========================================
-// CITY BUILDINGS
-// ========================================
+function createBuilding(x,z,w,h,d){
+const group=new THREE.Group();
+const body=new THREE.Mesh(
+new THREE.BoxGeometry(w,h,d),
+new THREE.MeshStandardMaterial({
+color:buildingColors[Math.floor(Math.random()*buildingColors.length)]
+})
+);
+body.position.y=h/2;
+body.castShadow=true;
+body.receiveShadow=true;
+group.add(body);
 
-const buildingColors = [
-    0xd9c4a5,
-    0xc5d4dc,
-    0xe2d4c5,
-    0xa9b9c6,
-    0xd7b5a1,
-    0x9daea0
-];
+const windowMat=new THREE.MeshStandardMaterial({color:0x65b5d6});
 
-function createBuilding(x,z,w,h,d) {
-
-    const building = new THREE.Group();
-
-    const color = buildingColors[
-        Math.floor(Math.random()*buildingColors.length)
-    ];
-
-    const body = new THREE.Mesh(
-        new THREE.BoxGeometry(w,h,d),
-        new THREE.MeshStandardMaterial({
-            color,
-            roughness:0.8
-        })
-    );
-
-    body.position.y = h/2;
-
-    body.castShadow = true;
-
-    body.receiveShadow = true;
-
-    building.add(body);
-
-    // Windows
-
-    const windowMat = new THREE.MeshStandardMaterial({
-        color:0x65b5d6,
-        metalness:0.2
-    });
-
-    for(let y=3;y<h-2;y+=3) {
-
-        for(let wx=-w/2+2;wx<w/2-1;wx+=4) {
-
-            const win = new THREE.Mesh(
-                new THREE.BoxGeometry(1.5,1.4,0.08),
-                windowMat
-            );
-
-            win.position.set(
-                wx,
-                y,
-                d/2+0.05
-            );
-
-            building.add(win);
-
-        }
-
-    }
-
-    building.position.set(x,0,z);
-
-    scene.add(building);
-
-    buildings.push({
-        x,z,w,d
-    });
-
+for(let y=3;y<h-2;y+=3){
+for(let wx=-w/2+2;wx<w/2-1;wx+=4){
+const win=new THREE.Mesh(new THREE.BoxGeometry(1.5,1.4,.08),windowMat);
+win.position.set(wx,y,d/2+.05);
+group.add(win);
+}
 }
 
-
-// Generate city
-
-for(let x=-450;x<=450;x+=100) {
-
-    for(let z=-450;z<=450;z+=100) {
-
-        for(const sx of [-25,25]) {
-
-            for(const sz of [-25,25]) {
-
-                createBuilding(
-                    x+sx,
-                    z+sz,
-                    20,
-                    18+Math.random()*55,
-                    20
-                );
-
-            }
-
-        }
-
-    }
-
+group.position.set(x,0,z);
+scene.add(group);
+buildings.push({x,z,w,d});
 }
 
-
-// ========================================
-// COLLISION
-// ========================================
-
-function checkBuildingCollision(object,radius=0.7) {
-
-    for(const b of buildings) {
-
-        const dx=object.position.x-b.x;
-
-        const dz=object.position.z-b.z;
-
-        if(
-            Math.abs(dx)<b.w/2+radius &&
-            Math.abs(dz)<b.d/2+radius
-        ) {
-
-            if(Math.abs(dx)>Math.abs(dz)) {
-
-                object.position.x =
-                    b.x+Math.sign(dx||1)*(b.w/2+radius);
-
-            } else {
-
-                object.position.z =
-                    b.z+Math.sign(dz||1)*(b.d/2+radius);
-
-            }
-
-        }
-
-    }
-
+for(let x=-450;x<=450;x+=100){
+for(let z=-450;z<=450;z+=100){
+for(const sx of [-25,25]){
+for(const sz of [-25,25]){
+const bx=x+sx,bz=z+sz;
+if(Math.abs(bx-35)<18&&Math.abs(bz-35)<18)continue;
+createBuilding(bx,bz,20,18+Math.random()*55,20);
+}
+}
+}
 }
 
+function checkBuildingCollision(object,radius=.7){
+for(const b of buildings){
+const dx=object.position.x-b.x;
+const dz=object.position.z-b.z;
+if(Math.abs(dx)<b.w/2+radius&&Math.abs(dz)<b.d/2+radius){
+if(Math.abs(dx)>Math.abs(dz)){
+object.position.x=b.x+Math.sign(dx||1)*(b.w/2+radius);
+}else{
+object.position.z=b.z+Math.sign(dz||1)*(b.d/2+radius);
+}
+}
+}
+}
 
-// ========================================
-// PLAYER
-// ========================================
+function normalizeModel(model,height){
+const box=new THREE.Box3().setFromObject(model);
+const size=box.getSize(new THREE.Vector3());
+if(size.y>0)model.scale.multiplyScalar(height/size.y);
+const b=new THREE.Box3().setFromObject(model);
+const center=b.getCenter(new THREE.Vector3());
+model.position.x-=center.x;
+model.position.z-=center.z;
+model.position.y-=b.min.y;
+}
 
-const player = new THREE.Group();
+function createCharacter(color=0x0066ff){
+const rig=new THREE.Group();
+const mat=new THREE.MeshStandardMaterial({color});
+const torso=new THREE.Mesh(new THREE.BoxGeometry(.8,.9,.5),mat);
+torso.position.y=1.3;
+rig.add(torso);
 
+const head=new THREE.Mesh(new THREE.BoxGeometry(.5,.5,.5),mat);
+head.position.y=2;
+rig.add(head);
+
+function limb(x,y){
+const pivot=new THREE.Group();
+pivot.position.set(x,y,0);
+const mesh=new THREE.Mesh(new THREE.BoxGeometry(.23,.8,.23),mat);
+mesh.position.y=-.4;
+pivot.add(mesh);
+rig.add(pivot);
+return pivot;
+}
+
+rig.userData.parts={
+torso,
+leftArm:limb(-.5,1.7),
+rightArm:limb(.5,1.7),
+leftLeg:limb(-.22,.9),
+rightLeg:limb(.22,.9)
+};
+return rig;
+}
+
+const player=new THREE.Group();
 scene.add(player);
-
 player.position.set(0,0,0);
 
 let playerMixer=null;
-
 let playerActions={};
-
 let activePlayerAction=null;
-
 let playerModel=null;
-
-let playerRig=null;
-
-
-// Default character
-
-function createCharacter(color=0x0066ff) {
-
-    const rig=new THREE.Group();
-
-    const mat=new THREE.MeshStandardMaterial({
-        color
-    });
-
-    const torso=new THREE.Mesh(
-        new THREE.BoxGeometry(0.8,0.9,0.5),
-        mat
-    );
-
-    torso.position.y=1.3;
-
-    rig.add(torso);
-
-    const head=new THREE.Mesh(
-        new THREE.BoxGeometry(0.5,0.5,0.5),
-        mat
-    );
-
-    head.position.y=2;
-
-    rig.add(head);
-
-    function limb(x,y) {
-
-        const pivot=new THREE.Group();
-
-        pivot.position.set(x,y,0);
-
-        const mesh=new THREE.Mesh(
-            new THREE.BoxGeometry(0.23,0.8,0.23),
-            mat
-        );
-
-        mesh.position.y=-0.4;
-
-        pivot.add(mesh);
-
-        rig.add(pivot);
-
-        return pivot;
-
-    }
-
-    rig.userData.parts={
-        leftArm:limb(-0.5,1.7),
-        rightArm:limb(0.5,1.7),
-        leftLeg:limb(-0.22,0.9),
-        rightLeg:limb(0.22,0.9)
-    };
-
-    return rig;
-
-}
-
-playerRig=createCharacter();
-
+let playerRig=createCharacter();
 player.add(playerRig);
 
+loader.load('./jason_duval.glb',gltf=>{
+player.remove(playerRig);
+playerModel=gltf.scene;
+normalizeModel(playerModel,1.8);
+player.add(playerModel);
 
-// Load Jason
+if(gltf.animations.length){
+playerMixer=new THREE.AnimationMixer(playerModel);
+gltf.animations.forEach(clip=>{
+playerActions[clip.name.toLowerCase()]=playerMixer.clipAction(clip);
+});
+}
+},undefined,()=>console.log("Dùng nhân vật mặc định"));
 
-loader.load(
-    './jason_duval.glb',
-    gltf=>{
-
-        player.remove(playerRig);
-
-        playerModel=gltf.scene;
-
-        normalizeModel(playerModel,1.8);
-
-        player.add(playerModel);
-
-        if(gltf.animations.length) {
-
-            playerMixer=new THREE.AnimationMixer(playerModel);
-
-            gltf.animations.forEach(clip=>{
-
-                playerActions[
-                    clip.name.toLowerCase()
-                ]=playerMixer.clipAction(clip);
-
-            });
-
-        }
-
-        console.log("Jason loaded");
-
-    },
-    undefined,
-    ()=>console.log("Using blue player")
-);
-
-
-function normalizeModel(model,height) {
-
-    const box=new THREE.Box3().setFromObject(model);
-
-    const size=box.getSize(new THREE.Vector3());
-
-    if(size.y>0) {
-
-        model.scale.multiplyScalar(height/size.y);
-
-    }
-
-    const newBox=new THREE.Box3().setFromObject(model);
-
-    const center=newBox.getCenter(new THREE.Vector3());
-
-    model.position.x-=center.x;
-
-    model.position.z-=center.z;
-
-    model.position.y-=newBox.min.y;
-
+function playPlayerAnimation(type){
+if(!playerMixer)return;
+const names=Object.keys(playerActions);
+let name=names.find(n=>n.includes(type));
+if(!name&&names.length)name=names[0];
+if(!name)return;
+const next=playerActions[name];
+if(activePlayerAction!==next){
+next.reset();
+next.fadeIn(.2);
+if(activePlayerAction)activePlayerAction.fadeOut(.2);
+next.play();
+activePlayerAction=next;
+}
 }
 
-
-function playPlayerAnimation(type) {
-
-    if(!playerMixer) return;
-
-    const names=Object.keys(playerActions);
-
-    let name=names.find(n=>n.includes(type));
-
-    if(!name && names.length) name=names[0];
-
-    if(!name) return;
-
-    const next=playerActions[name];
-
-    if(activePlayerAction!==next) {
-
-        next.reset();
-
-        next.fadeIn(0.2);
-
-        if(activePlayerAction) {
-            activePlayerAction.fadeOut(0.2);
-        }
-
-        next.play();
-
-        activePlayerAction=next;
-
-    }
-
-}
-
-
-// ========================================
-// NPC SYSTEM
-// ========================================
-
+// NPC
 const npcs=[];
-
 let tommyModel=null;
+let tommyAnimations=[];
 
-loader.load(
-    './tommy_vercetti_cutscene_model.glb',
-    gltf=>{
-        tommyModel=gltf.scene;
-        console.log("Tommy loaded");
-    },
-    undefined,
-    ()=>console.log("Using NPC blocks")
-);
+loader.load('./tommy_vercetti_cutscene_model.glb',gltf=>{
+tommyModel=gltf.scene;
+tommyAnimations=gltf.animations||[];
+updateNPCModels();
+},undefined,()=>console.log("Dùng NPC mặc định"));
 
+function createNPC(x,z){
+const object=new THREE.Group();
+const rig=createCharacter(new THREE.Color().setHSL(Math.random(),.65,.5));
+object.add(rig);
+object.position.set(x,0,z);
+scene.add(object);
 
-function createNPC(x,z) {
-
-    const object=new THREE.Group();
-
-    const color=new THREE.Color().setHSL(
-        Math.random(),0.65,0.5
-    );
-
-    const rig=createCharacter(color);
-
-    object.add(rig);
-
-    object.position.set(x,0,z);
-
-    scene.add(object);
-
-    npcs.push({
-
-        object,
-        rig,
-        direction:Math.random()*Math.PI*2,
-        timer:100+Math.random()*200,
-        animationTime:Math.random()*10,
-        walking:true,
-        modelLoaded:false
-
-    });
-
+npcs.push({
+object,rig,
+direction:Math.random()*Math.PI*2,
+timer:100+Math.random()*200,
+animationTime:Math.random()*10,
+walking:true,
+modelLoaded:false,
+mixer:null
+});
 }
 
-
-// Create 30 NPCs
-
-for(let i=0;i<30;i++) {
-
-    createNPC(
-        Math.random()*300-150,
-        Math.random()*300-150
-    );
-
+for(let i=0;i<30;i++){
+createNPC(Math.random()*300-150,Math.random()*300-150);
 }
 
+function updateNPCModels(){
+if(!tommyModel)return;
+npcs.forEach(npc=>{
+if(npc.modelLoaded)return;
+const model=cloneSkeleton(tommyModel);
+normalizeModel(model,1.8);
+npc.object.remove(npc.rig);
+npc.object.add(model);
+npc.model=model;
 
-// Load Tommy into NPCs
-
-function updateNPCModels() {
-
-    if(!tommyModel) return;
-
-    npcs.forEach(npc=>{
-
-        if(npc.modelLoaded) return;
-
-        const model=tommyModel.clone(true);
-
-        normalizeModel(model,1.8);
-
-        npc.object.remove(npc.rig);
-
-        npc.object.add(model);
-
-        npc.modelLoaded=true;
-
-    });
-
+if(tommyAnimations.length){
+npc.mixer=new THREE.AnimationMixer(model);
+const clip=tommyAnimations.find(c=>/walk|run|idle/i.test(c.name))||tommyAnimations[0];
+npc.walkAction=npc.mixer.clipAction(clip);
+npc.walkAction.play();
+}
+npc.modelLoaded=true;
+});
 }
 
-
-// ========================================
-// NPC AI
-// ========================================
-
-function updateNPCs(delta) {
-
-    npcs.forEach(npc=>{
-
-        const obj=npc.object;
-
-        npc.timer--;
-
-        if(npc.timer<=0) {
-
-            npc.direction=Math.random()*Math.PI*2;
-
-            npc.timer=100+Math.random()*200;
-
-            npc.walking=Math.random()>0.2;
-
-        }
-
-        if(npc.walking) {
-
-            obj.position.x+=
-                Math.sin(npc.direction)*delta*2.5;
-
-            obj.position.z+=
-                Math.cos(npc.direction)*delta*2.5;
-
-            obj.rotation.y=npc.direction;
-
-        }
-
-        // Keep NPCs inside the city
-
-        obj.position.x=THREE.MathUtils.clamp(
-            obj.position.x,-480,480
-        );
-
-        obj.position.z=THREE.MathUtils.clamp(
-            obj.position.z,-480,480
-        );
-
-        npc.animationTime+=delta*8;
-
-        const parts=npc.rig.userData.parts;
-
-        if(parts) {
-
-            const swing=npc.walking
-                ?Math.sin(npc.animationTime)*0.5
-                :0;
-
-            parts.leftLeg.rotation.x=swing;
-
-            parts.rightLeg.rotation.x=-swing;
-
-            parts.leftArm.rotation.x=-swing;
-
-            parts.rightArm.rotation.x=swing;
-
-        }
-
-    });
-
+function updateNPCs(delta){
+npcs.forEach(npc=>{
+const obj=npc.object;
+npc.timer--;
+if(npc.timer<=0){
+npc.direction=Math.random()*Math.PI*2;
+npc.timer=100+Math.random()*200;
+npc.walking=Math.random()>.2;
 }
 
+if(npc.walking){
+const old=obj.position.clone();
+obj.position.x+=Math.sin(npc.direction)*delta*2.5;
+obj.position.z+=Math.cos(npc.direction)*delta*2.5;
+obj.rotation.y=npc.direction;
+checkBuildingCollision(obj,.8);
+if(obj.position.distanceTo(old)<.05)npc.direction+=Math.PI*(.6+Math.random()*.8);
+}
 
-// ========================================
+obj.position.x=THREE.MathUtils.clamp(obj.position.x,-480,480);
+obj.position.z=THREE.MathUtils.clamp(obj.position.z,-480,480);
+npc.animationTime+=delta*8;
+if(npc.mixer)npc.mixer.update(delta);
+
+const parts=npc.rig.userData.parts;
+if(parts){
+const swing=npc.walking?Math.sin(npc.animationTime)*.5:0;
+parts.leftLeg.rotation.x=swing;
+parts.rightLeg.rotation.x=-swing;
+parts.leftArm.rotation.x=-swing;
+parts.rightArm.rotation.x=swing;
+}
+});
+}
+
 // CARS
-// ========================================
-
 const cars=[];
-
 let carModel=null;
 
-loader.load(
-    './3d_vapid_creado_gta_vi_game-ready_low_poly.glb',
-    gltf=>{
-        carModel=gltf.scene;
-        normalizeModel(carModel,1.7);
-        console.log("Vapid loaded");
-    },
-    undefined,
-    ()=>console.log("Using default cars")
+loader.load('./3d_vapid_creado_gta_vi_game-ready_low_poly.glb',gltf=>{
+carModel=gltf.scene;
+normalizeModel(carModel,1.7);
+updateCarModels();
+},undefined,()=>console.log("Dùng xe mặc định"));
+
+function createCar(x,z,traffic=false){
+const object=new THREE.Group();
+
+const body=new THREE.Mesh(
+new THREE.BoxGeometry(2.2,.8,4.5),
+new THREE.MeshStandardMaterial({color:traffic?0x1565c0:0xc62828,metalness:.3})
 );
-
-
-function createCar(x,z,traffic=false) {
-
-    const object=new THREE.Group();
-
-    const body=new THREE.Mesh(
-        new THREE.BoxGeometry(2.2,0.8,4.5),
-        new THREE.MeshStandardMaterial({
-            color:traffic
-                ?[0xc62828,0xeeeeee,0x1565c0,0x222222][Math.floor(Math.random()*4)]
-                :0xc62828,
-            metalness:0.3
-        })
-    );
-
-    body.position.y=0.8;
-
-    object.add(body);
-
-    const cabin=new THREE.Mesh(
-        new THREE.BoxGeometry(1.8,0.8,2),
-        new THREE.MeshStandardMaterial({
-            color:0x222222
-        })
-    );
-
-    cabin.position.set(0,1.5,-0.3);
-
-    object.add(cabin);
-
-    const wheels=[];
-
-    for(const wx of [-1.1,1.1]) {
-
-        for(const wz of [-1.4,1.4]) {
-
-            const wheel=new THREE.Mesh(
-                new THREE.CylinderGeometry(0.4,0.4,0.25,16),
-                new THREE.MeshStandardMaterial({
-                    color:0x111111
-                })
-            );
-
-            wheel.rotation.z=Math.PI/2;
-
-            wheel.position.set(wx,0.4,wz);
-
-            object.add(wheel);
-
-            wheels.push(wheel);
-
-        }
-
-    }
-
-    object.position.set(x,0,z);
-
-    scene.add(object);
-
-    const data={
-
-        object,
-        wheels,
-        traffic,
-        trafficSpeed:10+Math.random()*8,
-        currentSpeed:10,
-        direction:1,
-        speed:0,
-        damage:0,
-        modelLoaded:false
-
-    };
-
-    cars.push(data);
-
-    return data;
-
-}
-
-
-// Player cars
-
-for(let i=0;i<6;i++) {
-
-    createCar(
-        Math.random()*100-50,
-        Math.random()*100-50
-    );
-
-}
-
-
-// Traffic cars
-
-for(let i=0;i<12;i++) {
-
-    const c=createCar(
-        -450+i*80,
-        -6,
-        true
-    );
-
-    c.direction=1;
-
-}
-
-
-// Load Vapid model
-
-function updateCarModels() {
-
-    if(!carModel) return;
-
-    cars.forEach(car=>{
-
-        if(car.modelLoaded) return;
-
-        car.object.clear();
-
-        car.object.add(carModel.clone(true));
-
-        car.modelLoaded=true;
-
-    });
-
-}
-
-
-// ========================================
-// TRAFFIC AI
-// ========================================
-
-function updateCars(delta) {
-
-    cars.forEach((car,index)=>{
-
-        const obj=car.object;
-
-        if(car.traffic) {
-
-            let target=car.trafficSpeed;
-
-            // Avoid other traffic
-
-            for(let j=0;j<cars.length;j++) {
-
-                if(j===index) continue;
-
-                const other=cars[j];
-
-                if(!other.traffic) continue;
-
-                if(other.direction!==car.direction) continue;
-
-                const distance=obj.position.distanceTo(
-                    other.object.position
-                );
-
-                if(distance<9 && distance>0.1) {
-
-                    target=0;
-
-                }
-
-            }
-
-            car.currentSpeed=THREE.MathUtils.damp(
-                car.currentSpeed,
-                target,
-                2,
-                delta
-            );
-
-            obj.position.x+=car.currentSpeed*delta;
-
-            obj.rotation.y=Math.PI/2;
-
-            if(obj.position.x>500) {
-                obj.position.x=-500;
-            }
-
-            car.wheels.forEach(w=>{
-                w.rotation.x+=car.currentSpeed*delta;
-            });
-
-            continue;
-
-        }
-
-        if(!driving || currentCar!==car) return;
-
-        if(keys.w) car.speed+=8*delta;
-
-        if(keys.s) car.speed-=12*delta;
-
-        car.speed+=-joystick.y*8*delta;
-
-        car.speed=THREE.MathUtils.clamp(
-            car.speed,-12,35
-        );
-
-        car.speed*=Math.pow(0.985,delta*60);
-
-        obj.rotation.y-=joystick.x*car.speed*0.002;
-
-        obj.position.x+=
-            Math.sin(obj.rotation.y)*car.speed*delta;
-
-        obj.position.z+=
-            Math.cos(obj.rotation.y)*car.speed*delta;
-
-        checkBuildingCollision(obj,2);
-
-        car.wheels.forEach(w=>{
-            w.rotation.x+=car.speed*delta;
-        });
-
-        player.position.copy(obj.position);
-
-    });
-
-}
-
-
-// ========================================
-// CAR DAMAGE VISUAL
-// ========================================
-
-function damageCar(car,amount) {
-
-    if(!car) return;
-
-    car.damage=Math.min(
-        car.damage+amount,
-        100
-    );
-
-    const body=car.object.children[0];
-
-    if(body) {
-
-        body.scale.x=1-car.damage/100*0.12;
-
-        body.scale.y=1-car.damage/100*0.08;
-
-    }
-
-    showMessage(
-        "Vehicle damage: "+Math.round(car.damage)+"%"
-    );
-
-}
-
-
-// ========================================
-// PLAYER INPUT
-// ========================================
-
-const keys={};
-
-window.addEventListener("keydown",e=>{
-
-    keys[e.key.toLowerCase()]=true;
-
-    if(e.code==="Space") {
-        keys.space=true;
-        e.preventDefault();
-    }
-
-});
-
-window.addEventListener("keyup",e=>{
-
-    keys[e.key.toLowerCase()]=false;
-
-    if(e.code==="Space") {
-        keys.space=false;
-    }
-
-});
-
-
-// ========================================
-// JOYSTICK
-// ========================================
-
-const joyBase=document.getElementById("joyBase");
-
-const joyKnob=document.getElementById("joyKnob");
-
-const joystick={
-    x:0,
-    y:0
-};
-
-let joyPointer=null;
-
-function moveJoystick(e) {
-
-    const rect=joyBase.getBoundingClientRect();
-
-    let dx=e.clientX-(rect.left+rect.width/2);
-
-    let dy=e.clientY-(rect.top+rect.height/2);
-
-    const max=43;
-
-    const distance=Math.hypot(dx,dy);
-
-    if(distance>max) {
-
-        dx=dx/distance*max;
-
-        dy=dy/distance*max;
-
-    }
-
-    joystick.x=dx/max;
-
-    joystick.y=dy/max;
-
-    joyKnob.style.left=`calc(50% + ${dx}px)`;
-
-    joyKnob.style.top=`calc(50% + ${dy}px)`;
-
-}
-
-joyBase.addEventListener("pointerdown",e=>{
-
-    e.preventDefault();
-
-    joyPointer=e.pointerId;
-
-    joyBase.setPointerCapture(e.pointerId);
-
-    moveJoystick(e);
-
-});
-
-joyBase.addEventListener("pointermove",e=>{
-
-    if(e.pointerId===joyPointer) moveJoystick(e);
-
-});
-
-function releaseJoy(e) {
-
-    if(e.pointerId!==joyPointer) return;
-
-    joystick.x=0;
-
-    joystick.y=0;
-
-    joyPointer=null;
-
-    joyKnob.style.left="50%";
-
-    joyKnob.style.top="50%";
-
-}
-
-joyBase.addEventListener("pointerup",releaseJoy);
-
-joyBase.addEventListener("pointercancel",releaseJoy);
-
-
-// Buttons
-
-function holdButton(id,key) {
-
-    const button=document.getElementById(id);
-
-    button.addEventListener("pointerdown",e=>{
-
-        e.preventDefault();
-
-        keys[key]=true;
-
-        button.setPointerCapture(e.pointerId);
-
-    });
-
-    button.addEventListener("pointerup",()=>{
-        keys[key]=false;
-    });
-
-    button.addEventListener("pointercancel",()=>{
-        keys[key]=false;
-    });
-
-    button.addEventListener("lostpointercapture",()=>{
-        keys[key]=false;
-    });
-
-}
-
-holdButton("jump","space");
-
-holdButton("run","shift");
-
-
-// ========================================
-// PLAYER MOVEMENT
-// ========================================
-
-let velocityY=0;
-
-let onGround=true;
-
-let animationTime=0;
-
-let driving=false;
-
-let currentCar=null;
-
-function updatePlayer(delta) {
-
-    if(driving) return;
-
-    let dx=joystick.x;
-
-    let dz=joystick.y;
-
-    if(keys.w) dz-=1;
-
-    if(keys.s) dz+=1;
-
-    if(keys.a) dx-=1;
-
-    if(keys.d) dx+=1;
-
-    const length=Math.hypot(dx,dz);
-
-    if(length>1) {
-
-        dx/=length;
-
-        dz/=length;
-
-    }
-
-    const moving=length>0.1;
-
-    const speed=keys.shift?12:6;
-
-    if(moving) {
-
-        player.position.x+=dx*speed*delta;
-
-        player.position.z+=dz*speed*delta;
-
-        player.rotation.y=Math.atan2(dx,dz);
-
-        checkBuildingCollision(player);
-
-    }
-
-    if(keys.space && onGround) {
-
-        velocityY=8;
-
-        onGround=false;
-
-    }
-
-    velocityY-=20*delta;
-
-    player.position.y+=velocityY*delta;
-
-    if(player.position.y<0) {
-
-        player.position.y=0;
-
-        velocityY=0;
-
-        onGround=true;
-
-    }
-
-    if(playerMixer) {
-
-        const type=moving
-            ?(keys.shift?"run":"walk")
-            :"idle";
-
-        playPlayerAnimation(type);
-
-        playerMixer.update(delta);
-
-    } else {
-
-        animationTime+=delta*(keys.shift?15:9);
-
-        const parts=playerRig.userData.parts;
-
-        const swing=moving
-            ?Math.sin(animationTime)*0.65
-            :0;
-
-        parts.leftLeg.rotation.x=swing;
-
-        parts.rightLeg.rotation.x=-swing;
-
-        parts.leftArm.rotation.x=-swing;
-
-        parts.rightArm.rotation.x=swing;
-
-        parts.torso.position.y=
-            1.3+(moving?Math.abs(Math.sin(animationTime*2))*0.04:0);
-
-    }
-
-}
-
-
-// ========================================
-// ENTER AND EXIT CAR
-// ========================================
-
-function showMessage(text) {
-
-    const el=document.getElementById("message");
-
-    el.textContent=text;
-
-    el.style.display="block";
-
-    clearTimeout(window.msgTimer);
-
-    window.msgTimer=setTimeout(()=>{
-
-        el.style.display="none";
-
-    },2200);
-
-}
-
-
-function enterExitCar() {
-
-    if(!driving) {
-
-        let closest=null;
-
-        let min=5;
-
-        cars.forEach(car=>{
-
-            if(car.traffic) return;
-
-            const distance=player.position.distanceTo(
-                car.object.position
-            );
-
-            if(distance<min) {
-
-                min=distance;
-
-                closest=car;
-
-            }
-
-        });
-
-        if(!closest) {
-
-            showMessage("Không có xe gần đây!");
-
-            return;
-
-        }
-
-        currentCar=closest;
-
-        driving=true;
-
-        player.visible=false;
-
-        showMessage("Đã lên xe!");
-
-    } else {
-
-        driving=false;
-
-        player.visible=true;
-
-        player.position.copy(currentCar.object.position);
-
-        player.position.x+=3;
-
-        currentCar=null;
-
-        showMessage("Đã xuống xe!");
-
-    }
-
-}
-
-document.getElementById("carButton").onclick=
-    enterExitCar;
-
-window.addEventListener("keydown",e=>{
-
-    if(e.key.toLowerCase()==="e" && !e.repeat) {
-        enterExitCar();
-    }
-
-});
-
-
-// ========================================
-// CAMERA
-// ========================================
-
-let cameraAngle=0;
-
-let dragging=false;
-
-let lastX=0;
-
-renderer.domElement.addEventListener("pointerdown",e=>{
-
-    dragging=true;
-
-    lastX=e.clientX;
-
-});
-
-window.addEventListener("pointerup",()=>{
-    dragging=false;
-});
-
-window.addEventListener("pointermove",e=>{
-
-    if(!dragging) return;
-
-    cameraAngle-=(e.clientX-lastX)*0.006;
-
-    lastX=e.clientX;
-
-});
-
-
-function updateCamera() {
-
-    const target=driving && currentCar
-        ?currentCar.object.position
-        :player.position;
-
-    const distance=driving?14:9;
-
-    const desired=new THREE.Vector3(
-
-        target.x-Math.sin(cameraAngle)*distance,
-
-        target.y+(driving?6:5),
-
-        target.z-Math.cos(cameraAngle)*distance
-
-    );
-
-    camera.position.lerp(desired,0.12);
-
-    camera.lookAt(
-        target.x,
-        target.y+1,
-        target.z
-    );
-
-}
-
-
-// ========================================
-// SHOP
-// ========================================
-
-let money=500;
-
-let inventory=[];
-
-function updateMoney() {
-
-    document.getElementById("money").textContent=
-        "$"+money;
-
-    document.getElementById("shopMoney").textContent=
-        "$"+money;
-
-}
-
-function openShop() {
-
-    document.getElementById("shop").style.display="block";
-
-    updateMoney();
-
-}
-
-function closeShop() {
-
-    document.getElementById("shop").style.display="none";
-
-}
-
-document.getElementById("shopButton").onclick=openShop;
-
-document.getElementById("closeShop").onclick=closeShop;
-
-document.getElementById("buyHealth").onclick=()=>{
-
-    if(money<50) {
-
-        showMessage("Không đủ tiền!");
-
-        return;
-
-    }
-
-    money-=50;
-
-    inventory.push("health");
-
-    updateMoney();
-
-    showMessage("Đã mua vật phẩm!");
-
-};
-
-document.getElementById("buyOutfit").onclick=()=>{
-
-    if(money<100) {
-
-        showMessage("Không đủ tiền!");
-
-        return;
-
-    }
-
-    money-=100;
-
-    inventory.push("outfit");
-
-    updateMoney();
-
-    showMessage("Đã mua trang phục!");
-
-};
-
-
-// ========================================
-// SHOP BUILDING
-// ========================================
-
-const shopBuilding=new THREE.Group();
-
-const shopBody=new THREE.Mesh(
-    new THREE.BoxGeometry(12,8,10),
-    new THREE.MeshStandardMaterial({
-        color:0xffa832
-    })
+body.position.y=.8;
+object.add(body);
+
+const cabin=new THREE.Mesh(
+new THREE.BoxGeometry(1.8,.8,2),
+new THREE.MeshStandardMaterial({color:0x222222})
 );
+cabin.position.set(0,1.5,-.3);
+object.add(cabin);
 
-shopBody.position.y=4;
-
-shopBuilding.add(shopBody);
-
-const sign=new THREE.Mesh(
-    new THREE.BoxGeometry(8,1.5,0.3),
-    new THREE.MeshBasicMaterial({
-        color:0x00ff88
-    })
+const wheels=[];
+for(const wx of [-1.1,1.1]){
+for(const wz of [-1.4,1.4]){
+const wheel=new THREE.Mesh(
+new THREE.CylinderGeometry(.4,.4,.25,16),
+new THREE.MeshStandardMaterial({color:0x111111})
 );
+wheel.rotation.z=Math.PI/2;
+wheel.position.set(wx,.4,wz);
+object.add(wheel);
+wheels.push(wheel);
+}
+}
 
-sign.position.set(0,7,5.2);
+object.position.set(x,0,z);
+scene.add(object);
 
-shopBuilding.add(sign);
+const car={
+object,wheels,
+traffic,
+trafficSpeed:10+Math.random()*8,
+currentSpeed:10,
+direction:1,
+axis:"x",
+speed:0,
+damage:0,
+damageCooldown:0
+};
+cars.push(car);
+return car;
+}
 
-shopBuilding.position.set(35,0,35);
+const playerCar=createCar(5,0,false);
 
+for(let i=0;i<8;i++){
+const east=createCar(-450+i*80,-6,true);
+east.direction=1;
+east.axis="x";
+east.object.rotation.y=Math.PI/2;
+
+const west=createCar(450-i*80,6,true);
+west.direction=-1;
+west.axis="x";
+west.object.rotation.y=-Math.PI/2;
+
+const north=createCar(-6,-420+i*115,true);
+north.axis="z";
+north.direction=1;
+
+const south=createCar(6,420-i*115,true);
+south.axis="z";
+south.direction=-1;
+south.object.rotation.y=Math.PI;
+}
+
+function updateCarModels(){
+if(!carModel)return;
+cars.forEach(car=>{
+if(car.modelLoaded)return;
+const model=cloneSkeleton(carModel);
+car.object.add(model);
+car.modelLoaded=true;
+});
+}
+
+// Shop
+const shopBuilding=new THREE.Mesh(
+new THREE.BoxGeometry(12,5,12),
+new THREE.MeshStandardMaterial({color:0xf0a32d})
+);
+shopBuilding.position.set(35,2.5,35);
 scene.add(shopBuilding);
 
+const shopRoof=new THREE.Mesh(
+new THREE.BoxGeometry(14,.8,14),
+new THREE.MeshStandardMaterial({color:0xb52c27})
+);
+shopRoof.position.set(35,5.4,35);
+scene.add(shopRoof);
 
-function checkShop() {
+// PLAYER STATE
+let money=500;
+let health=100;
+let inventory=[];
+let outfit=0;
+let currentCar=null;
+let missionActive=false;
+let missionTarget=null;
+let missionReward=0;
 
-    const distance=player.position.distanceTo(
-        shopBuilding.position
-    );
-
-    if(distance<10 && !driving) {
-
-        document.getElementById("shop").style.display="block";
-
-    }
-
+function updateMoney(){
+document.getElementById("money").textContent="$"+money;
+document.getElementById("shopMoney").textContent="$"+money;
 }
 
+function showMessage(text){
+const box=document.getElementById("message");
+box.textContent=text;
+box.style.display="block";
+clearTimeout(showMessage.timer);
+showMessage.timer=setTimeout(()=>box.style.display="none",2200);
+}
 
-// ========================================
-// MISSION SYSTEM
-// ========================================
+function damageCar(car,amount){
+if(car.damageCooldown>0)return;
+car.damage=Math.min(car.damage+amount,100);
+car.damageCooldown=.8;
+const scale=1-car.damage/250;
+car.object.scale.set(scale,1,scale);
+if(car.damage>=50)showMessage("Xe bị hư hại!");
+}
 
-const missions=[
+// Movement
+const keys={};
+window.addEventListener("keydown",e=>{
+keys[e.key.toLowerCase()]=true;
+if(e.key.toLowerCase()==="e")toggleCar();
+if(e.code==="Space")jump();
+});
+window.addEventListener("keyup",e=>keys[e.key.toLowerCase()]=false);
 
-    {
-        name:"Giao hàng Downtown",
-        x:180,
-        z:180,
-        reward:250
-    },
+let joy={x:0,y:0};
+const joyBase=document.getElementById("joyBase");
+const joyKnob=document.getElementById("joyKnob");
+let joyPointer=null;
 
-    {
-        name:"Giao hàng Ocean Beach",
-        x:-180,
-        z:200,
-        reward:400
-    },
+function setJoystick(e){
+const r=joyBase.getBoundingClientRect();
+const cx=r.left+r.width/2,cy=r.top+r.height/2;
+let dx=e.clientX-cx,dy=e.clientY-cy;
+const max=r.width*.34;
+const len=Math.hypot(dx,dy);
+if(len>max){dx=dx/len*max;dy=dy/len*max;}
+joy.x=dx/max;
+joy.y=dy/max;
+joyKnob.style.left=`${50+joy.x*34}%`;
+joyKnob.style.top=`${50+joy.y*34}%`;
+}
 
-    {
-        name:"Giao hàng Vice Point",
-        x:250,
-        z:-250,
-        reward:350
-    }
+document.getElementById("joystick").addEventListener("pointerdown",e=>{
+joyPointer=e.pointerId;
+e.currentTarget.setPointerCapture(e.pointerId);
+setJoystick(e);
+});
+document.getElementById("joystick").addEventListener("pointermove",e=>{
+if(e.pointerId===joyPointer)setJoystick(e);
+});
+function resetJoy(){
+joyPointer=null;
+joy.x=0;joy.y=0;
+joyKnob.style.left="50%";
+joyKnob.style.top="50%";
+}
+document.getElementById("joystick").addEventListener("pointerup",resetJoy);
+document.getElementById("joystick").addEventListener("pointercancel",resetJoy);
 
+let cameraAngle=0;
+let cameraPitch=.32;
+let dragging=false;
+let lastX=0,lastY=0;
+
+renderer.domElement.addEventListener("pointerdown",e=>{
+dragging=true;lastX=e.clientX;lastY=e.clientY;
+});
+window.addEventListener("pointerup",()=>dragging=false);
+window.addEventListener("pointermove",e=>{
+if(!dragging)return;
+cameraAngle-=(e.clientX-lastX)*.006;
+cameraPitch=THREE.MathUtils.clamp(cameraPitch+(e.clientY-lastY)*.003,.12,.8);
+lastX=e.clientX;lastY=e.clientY;
+});
+
+// Camera relative movement
+function movePlayer(delta){
+if(currentCar)return;
+
+let forward=0,side=0;
+if(keys.w||keys.arrowup)forward+=1;
+if(keys.s||keys.arrowdown)forward-=1;
+if(keys.a||keys.arrowleft)side-=1;
+if(keys.d||keys.arrowright)side+=1;
+
+forward+=-joy.y;
+side+=joy.x;
+
+const len=Math.hypot(forward,side);
+if(len>1){forward/=len;side/=len;}
+
+const speed=(keys.shift||document.getElementById("run").dataset.down==="1")?9:5;
+const dx=(Math.sin(cameraAngle)*forward+Math.cos(cameraAngle)*side)*speed*delta;
+const dz=(Math.cos(cameraAngle)*forward-Math.sin(cameraAngle)*side)*speed*delta;
+
+const old=player.position.clone();
+player.position.x+=dx;
+player.position.z+=dz;
+checkBuildingCollision(player,.7);
+
+if(player.position.distanceTo(old)>.001){
+player.rotation.y=Math.atan2(dx,dz);
+const parts=playerRig.userData.parts;
+if(parts){
+const swing=Math.sin(performance.now()*.012)*.55;
+parts.leftLeg.rotation.x=swing;
+parts.rightLeg.rotation.x=-swing;
+parts.leftArm.rotation.x=-swing;
+parts.rightArm.rotation.x=swing;
+}
+playPlayerAnimation(speed>5?"run":"walk");
+}else{
+playPlayerAnimation("idle");
+}
+}
+
+// Jump
+let verticalVelocity=0;
+let grounded=true;
+function jump(){
+if(!grounded||currentCar)return;
+verticalVelocity=6;
+grounded=false;
+}
+document.getElementById("jump").addEventListener("pointerdown",jump);
+document.getElementById("run").addEventListener("pointerdown",e=>e.currentTarget.dataset.down="1");
+document.getElementById("run").addEventListener("pointerup",e=>e.currentTarget.dataset.down="0");
+document.getElementById("run").addEventListener("pointercancel",e=>e.currentTarget.dataset.down="0");
+
+// Car controls
+function toggleCar(){
+if(currentCar){
+player.position.x=currentCar.object.position.x+Math.cos(currentCar.object.rotation.y)*3;
+player.position.z=currentCar.object.position.z-Math.sin(currentCar.object.rotation.y)*3;
+currentCar=null;
+showMessage("Đã xuống xe");
+}else{
+let nearest=null,dist=8;
+cars.forEach(car=>{
+if(car.traffic)return;
+const d=player.position.distanceTo(car.object.position);
+if(d<dist){dist=d;nearest=car;}
+});
+if(nearest){
+currentCar=nearest;
+showMessage("Đã lên xe");
+}else showMessage("Không có xe gần đây");
+}
+}
+document.getElementById("carButton").addEventListener("click",toggleCar);
+
+// Camera touch/mouse
+function updateCamera(){
+const target=currentCar?currentCar.object.position:player.position;
+const distance=currentCar?12:9;
+const horizontal=Math.cos(cameraPitch)*distance;
+camera.position.set(
+target.x+Math.sin(cameraAngle)*horizontal,
+target.y+3+Math.sin(cameraPitch)*distance,
+target.z+Math.cos(cameraAngle)*horizontal
+);
+camera.lookAt(target.x,target.y+1,target.z);
+}
+
+// Traffic AI
+function updateCars(delta){
+cars.forEach(car=>{
+if(car.damageCooldown>0)car.damageCooldown=Math.max(0,car.damageCooldown-delta);
+
+const obj=car.object;
+
+if(car.traffic){
+let target=car.trafficSpeed;
+for(const other of cars){
+if(other===car||!other.traffic)continue;
+if(other.direction!==car.direction||other.axis!==car.axis)continue;
+if(obj.position.distanceTo(other.object.position)<10)target=0;
+}
+car.currentSpeed=THREE.MathUtils.lerp(car.currentSpeed,target,delta*2);
+
+if(car.axis==="z"){
+obj.position.z+=car.currentSpeed*delta*car.direction;
+obj.rotation.y=car.direction===1?0:Math.PI;
+if(car.direction===1&&obj.position.z>500)obj.position.z=-500;
+if(car.direction===-1&&obj.position.z<-500)obj.position.z=500;
+}else{
+obj.position.x+=car.currentSpeed*delta*car.direction;
+obj.rotation.y=car.direction===1?Math.PI/2:-Math.PI/2;
+if(car.direction===1&&obj.position.x>500)obj.position.x=-500;
+if(car.direction===-1&&obj.position.x<-500)obj.position.x=500;
+}
+}else if(currentCar===car){
+const accel=(keys.w||keys.arrowup||joy.y<-.2)?1:0;
+const brake=(keys.s||keys.arrowdown||joy.y>.2)?1:0;
+car.speed+=accel*18*delta;
+car.speed-=brake*24*delta;
+car.speed*=Math.pow(.985,delta*60);
+car.speed=THREE.MathUtils.clamp(car.speed,-12,30);
+
+if(keys.a||keys.arrowleft||joy.x<-.2)obj.rotation.y+=2*delta*(car.speed>=0?1:-1);
+if(keys.d||keys.arrowright||joy.x>.2)obj.rotation.y-=2*delta*(car.speed>=0?1:-1);
+
+const previous=obj.position.clone();
+obj.position.x+=Math.sin(obj.rotation.y)*car.speed*delta;
+obj.position.z+=Math.cos(obj.rotation.y)*car.speed*delta;
+checkBuildingCollision(obj,2);
+
+if(obj.position.distanceTo(previous)>.12&&Math.abs(car.speed)>5){
+damageCar(car,Math.min(8,Math.abs(car.speed)*.12));
+car.speed*=-.22;
+}
+
+for(const other of cars){
+if(other===car||other.traffic)continue;
+if(obj.position.distanceTo(other.object.position)<3.1){
+damageCar(car,3);
+car.speed*=-.25;
+const push=obj.position.clone().sub(other.object.position);
+if(push.lengthSq()>.001)obj.position.add(push.normalize().multiplyScalar(.7));
+}
+}
+}
+});
+}
+
+// Missions
+const missionSpots=[
+{x:120,z:100,name:"Giao hàng tại Downtown",reward:300},
+{x:-180,z:220,name:"Đến bến cảng",reward:450},
+{x:300,z:-200,name:"Khám phá khu phố",reward:250},
+{x:-320,z:-150,name:"Đến khu trung tâm",reward:350}
 ];
 
-let activeMission=null;
+function startMission(){
+const m=missionSpots[Math.floor(Math.random()*missionSpots.length)];
+missionTarget=new THREE.Vector3(m.x,0,m.z);
+missionReward=m.reward;
+missionActive=true;
+document.getElementById("missionName").textContent=m.name;
+document.getElementById("missionReward").textContent="Reward: $"+m.reward;
+showMessage("Nhiệm vụ mới: "+m.name);
+}
+document.getElementById("startMission").addEventListener("click",startMission);
 
-let missionMarker=null;
-
-function startMission() {
-
-    if(activeMission) {
-
-        showMessage("Bạn đang có nhiệm vụ!");
-
-        return;
-
-    }
-
-    activeMission=missions[
-        Math.floor(Math.random()*missions.length)
-    ];
-
-    if(missionMarker) scene.remove(missionMarker);
-
-    missionMarker=new THREE.Mesh(
-        new THREE.CylinderGeometry(3,3,0.4,24),
-        new THREE.MeshBasicMaterial({
-            color:0x00ff55
-        })
-    );
-
-    missionMarker.position.set(
-        activeMission.x,
-        0.4,
-        activeMission.z
-    );
-
-    scene.add(missionMarker);
-
-    document.getElementById("missionName").textContent=
-        activeMission.name;
-
-    document.getElementById("missionReward").textContent=
-        "Reward: $"+activeMission.reward;
-
-    showMessage("Đã nhận nhiệm vụ!");
-
+function updateMission(){
+if(!missionActive)return;
+const pos=currentCar?currentCar.object.position:player.position;
+if(pos.distanceTo(missionTarget)<9){
+money+=missionReward;
+updateMoney();
+missionActive=false;
+showMessage("Hoàn thành nhiệm vụ! +$"+missionReward);
+document.getElementById("missionName").textContent="Đã hoàn thành!";
+}
 }
 
-document.getElementById("startMission").onclick=
-    startMission;
-
-
-function updateMission() {
-
-    if(!activeMission) return;
-
-    const position=driving && currentCar
-        ?currentCar.object.position
-        :player.position;
-
-    const target=new THREE.Vector3(
-        activeMission.x,
-        0,
-        activeMission.z
-    );
-
-    if(position.distanceTo(target)<8) {
-
-        money+=activeMission.reward;
-
-        updateMoney();
-
-        scene.remove(missionMarker);
-
-        missionMarker=null;
-
-        activeMission=null;
-
-        document.getElementById("missionName").textContent=
-            "Chưa có nhiệm vụ";
-
-        document.getElementById("missionReward").textContent=
-            "Reward: $0";
-
-        showMessage("Hoàn thành nhiệm vụ!");
-
-    }
-
-}
-
-
-// ========================================
-// MINIMAP
-// ========================================
-
-const map=document.getElementById("minimap");
-
-const ctx=map.getContext("2d");
-
-function drawMinimap() {
-
-    ctx.clearRect(0,0,260,260);
-
-    ctx.fillStyle="#55834d";
-
-    ctx.fillRect(0,0,260,260);
-
-    ctx.fillStyle="#33383c";
-
-    for(let i=0;i<=260;i+=26) {
-
-        ctx.fillRect(i-3,0,7,260);
-
-        ctx.fillRect(0,i-3,260,7);
-
-    }
-
-    const target=driving && currentCar
-        ?currentCar.object.position
-        :player.position;
-
-    function point(x,z) {
-
-        return {
-
-            x:130+(x-target.x)*0.2,
-
-            y:130+(z-target.z)*0.2
-
-        };
-
-    }
-
-    // NPCs
-
-    ctx.fillStyle="white";
-
-    npcs.forEach(npc=>{
-
-        const p=point(
-            npc.object.position.x,
-            npc.object.position.z
-        );
-
-        ctx.fillRect(p.x-2,p.y-2,4,4);
-
-    });
-
-    // Cars
-
-    ctx.fillStyle="#ffcc22";
-
-    cars.forEach(car=>{
-
-        const p=point(
-            car.object.position.x,
-            car.object.position.z
-        );
-
-        ctx.fillRect(p.x-2,p.y-2,5,5);
-
-    });
-
-    // Mission
-
-    if(activeMission) {
-
-        const p=point(
-            activeMission.x,
-            activeMission.z
-        );
-
-        ctx.fillStyle="#00ff55";
-
-        ctx.beginPath();
-
-        ctx.arc(p.x,p.y,6,0,Math.PI*2);
-
-        ctx.fill();
-
-    }
-
-    // Player
-
-    ctx.fillStyle="#00aaff";
-
-    ctx.beginPath();
-
-    ctx.arc(130,130,7,0,Math.PI*2);
-
-    ctx.fill();
-
-    ctx.strokeStyle="white";
-
-    ctx.lineWidth=2;
-
-    ctx.stroke();
-
-}
-
-
-// ========================================
-// WEATHER
-// ========================================
-
+// Weather
 let weatherMode="sunny";
-
+function changeWeather(){
+weatherMode=weatherMode==="sunny"?"rain":"sunny";
+document.getElementById("weather").textContent=weatherMode==="sunny"?"☀️ SUNNY":"🌧️ RAIN";
+scene.fog.color.set(weatherMode==="sunny"?0x91cce8:0x526a82);
+scene.background.set(weatherMode==="sunny"?0x91cce8:0x526a82);
+}
 let weatherTimer=0;
 
-const rainCount=1000;
-
-const rainPositions=new Float32Array(rainCount*3);
-
-for(let i=0;i<rainCount;i++) {
-
-    rainPositions[i*3]=Math.random()*150-75;
-
-    rainPositions[i*3+1]=Math.random()*60;
-
-    rainPositions[i*3+2]=Math.random()*150-75;
-
+// Day and night
+let timeOfDay="day";
+document.getElementById("timeButton").addEventListener("click",()=>{
+timeOfDay=timeOfDay==="day"?"night":"day";
+if(timeOfDay==="night"){
+scene.background.set(0x101b35);
+scene.fog.color.set(0x18233b);
+sun.intensity=.35;
+sun.color.set(0x9bbcff);
+document.getElementById("timeButton").textContent="🌙 NIGHT";
+}else{
+scene.background.set(weatherMode==="rain"?0x526a82:0x91cce8);
+scene.fog.color.copy(scene.background);
+sun.intensity=2;
+sun.color.set(0xffffff);
+document.getElementById("timeButton").textContent="☀️ DAY";
 }
+});
 
-const rainGeometry=new THREE.BufferGeometry();
-
-rainGeometry.setAttribute(
-    "position",
-    new THREE.BufferAttribute(rainPositions,3)
-);
-
-const rain=new THREE.Points(
-    rainGeometry,
-    new THREE.PointsMaterial({
-        color:0xbbeeff,
-        size:0.13
-    })
-);
-
-rain.visible=false;
-
-scene.add(rain);
-
-
-function changeWeather(mode) {
-
-    weatherMode=mode;
-
-    rain.visible=mode==="rain";
-
-    if(mode==="rain") {
-
-        scene.background.set(0x526a82);
-
-        scene.fog.color.set(0x526a82);
-
-        document.getElementById("weather").textContent=
-            "🌧️ RAINY";
-
-    } else {
-
-        scene.background.set(0x91cce8);
-
-        scene.fog.color.set(0x91cce8);
-
-        document.getElementById("weather").textContent=
-            "☀️ SUNNY";
-
-    }
-
+// Shop
+function openShop(){
+document.getElementById("shop").style.display="block";
+updateMoney();
 }
-
-
-function updateWeather(delta) {
-
-    weatherTimer+=delta;
-
-    if(weatherTimer>90) {
-
-        weatherTimer=0;
-
-        changeWeather(
-            weatherMode==="sunny"?"rain":"sunny"
-        );
-
-    }
-
-    if(weatherMode==="rain") {
-
-        const positions=
-            rainGeometry.attributes.position.array;
-
-        for(let i=0;i<rainCount;i++) {
-
-            positions[i*3+1]-=delta*35;
-
-            if(positions[i*3+1]<0) {
-
-                positions[i*3+1]=60;
-
-            }
-
-        }
-
-        rainGeometry.attributes.position.needsUpdate=true;
-
-        rain.position.copy(player.position);
-
-    }
-
+function closeShop(){
+document.getElementById("shop").style.display="none";
 }
+document.getElementById("shopButton").addEventListener("click",()=>{
+if(player.position.distanceTo(new THREE.Vector3(35,0,35))<18)openShop();
+else showMessage("Hãy đến cửa hàng trước!");
+});
+document.getElementById("closeShop").addEventListener("click",closeShop);
 
+document.getElementById("buyHealth").addEventListener("click",()=>{
+if(money<50)return showMessage("Không đủ tiền!");
+money-=50;health=100;updateMoney();showMessage("Đã hồi phục sức khỏe");
+});
+document.getElementById("buyOutfit").addEventListener("click",()=>{
+if(money<100)return showMessage("Không đủ tiền!");
+money-=100;outfit++;updateMoney();showMessage("Đã mua trang phục!");
+});
 
-// ========================================
-// SAVE SYSTEM
-// ========================================
-
-function saveGame() {
-
-    const data={
-
-        money,
-
-        inventory,
-
-        position:{
-            x:player.position.x,
-            y:player.position.y,
-            z:player.position.z
-        },
-
-        weather:weatherMode
-
-    };
-
-    localStorage.setItem(
-        "vice_city_save",
-        JSON.stringify(data)
-    );
-
-    document.getElementById("saveMenu").style.display=
-        "block";
-
-}
-
-function loadGame() {
-
-    const saved=localStorage.getItem("vice_city_save");
-
-    if(!saved) {
-
-        showMessage("Chưa có dữ liệu lưu!");
-
-        return;
-
-    }
-
-    try {
-
-        const data=JSON.parse(saved);
-
-        money=data.money??500;
-
-        inventory=data.inventory||[];
-
-        player.position.set(
-            data.position.x,
-            data.position.y,
-            data.position.z
-        );
-
-        changeWeather(data.weather||"sunny");
-
-        updateMoney();
-
-        showMessage("Đã tải game!");
-
-    } catch(e) {
-
-        showMessage("File lưu bị lỗi!");
-
-    }
-
-}
-
-document.getElementById("saveButton").onclick=saveGame;
-
-document.getElementById("loadButton").onclick=loadGame;
-
-document.getElementById("closeSave").onclick=()=>{
-
-    document.getElementById("saveMenu").style.display="none";
-
+// Save/load
+function saveGame(){
+const data={
+position:{x:player.position.x,y:player.position.y,z:player.position.z},
+money,health,inventory,outfit
 };
+localStorage.setItem("gtavi_save_v07",JSON.stringify(data));
+document.getElementById("saveMenu").style.display="block";
+}
+function loadGame(){
+const raw=localStorage.getItem("gtavi_save_v07");
+if(!raw)return showMessage("Chưa có dữ liệu lưu");
+try{
+const data=JSON.parse(raw);
+if(data.position){
+player.position.set(Number(data.position.x)||0,Number(data.position.y)||0,Number(data.position.z)||0);
+}
+money=Number.isFinite(Number(data.money))?Number(data.money):500;
+health=Number.isFinite(Number(data.health))?Number(data.health):100;
+inventory=Array.isArray(data.inventory)?data.inventory:[];
+outfit=Number(data.outfit)||0;
+updateMoney();
+showMessage("Đã tải dữ liệu");
+}catch(e){showMessage("Dữ liệu lưu bị lỗi");}
+}
+document.getElementById("saveButton").addEventListener("click",saveGame);
+document.getElementById("loadButton").addEventListener("click",loadGame);
+document.getElementById("closeSave").addEventListener("click",()=>{
+document.getElementById("saveMenu").style.display="none";
+});
 
+// Minimap
+const mapCanvas=document.getElementById("minimap");
+const mapCtx=mapCanvas.getContext("2d");
 
-// ========================================
-// MAIN GAME LOOP
-// ========================================
+function drawMinimap(){
+const w=mapCanvas.width,h=mapCanvas.height;
+mapCtx.clearRect(0,0,w,h);
+mapCtx.fillStyle="#284c3c";
+mapCtx.fillRect(0,0,w,h);
+mapCtx.strokeStyle="#888";
+mapCtx.lineWidth=7;
 
+for(let i=0;i<w;i+=26){
+mapCtx.beginPath();mapCtx.moveTo(i,0);mapCtx.lineTo(i,h);mapCtx.stroke();
+mapCtx.beginPath();mapCtx.moveTo(0,i);mapCtx.lineTo(w,i);mapCtx.stroke();
+}
+const pos=currentCar?currentCar.object.position:player.position;
+const px=w/2+pos.x*.18;
+const py=h/2+pos.z*.18;
+mapCtx.fillStyle="#ff3333";
+mapCtx.beginPath();mapCtx.arc(px,py,7,0,Math.PI*2);mapCtx.fill();
+
+if(missionActive){
+mapCtx.fillStyle="#ffcf48";
+mapCtx.beginPath();
+mapCtx.arc(w/2+missionTarget.x*.18,h/2+missionTarget.z*.18,6,0,Math.PI*2);
+mapCtx.fill();
+}
+}
+
+// Main loop
 const clock=new THREE.Clock();
 
-function animate() {
+function animate(){
+const delta=Math.min(clock.getDelta(),.05);
 
-    requestAnimationFrame(animate);
-
-    const delta=Math.min(clock.getDelta(),0.05);
-
-    updatePlayer(delta);
-
-    updateNPCs(delta);
-
-    updateCars(delta);
-
-    updateNPCModels();
-
-    updateCarModels();
-
-    updateMission();
-
-    updateWeather(delta);
-
-    updateCamera();
-
-    drawMinimap();
-
-    if(!driving) checkShop();
-
-    renderer.render(scene,camera);
-
+if(currentCar){
+player.position.copy(currentCar.object.position);
+}else{
+movePlayer(delta);
+verticalVelocity-=16*delta;
+player.position.y+=verticalVelocity*delta;
+if(player.position.y<=0){
+player.position.y=0;
+verticalVelocity=0;
+grounded=true;
+}
 }
 
-camera.position.set(0,8,15);
+updateNPCs(delta);
+updateCars(delta);
+updateMission();
+updateNPCModels();
+updateCamera();
+drawMinimap();
 
-camera.lookAt(0,0,0);
+if(playerMixer)playerMixer.update(delta);
 
-animate();
+renderer.render(scene,camera);
+}
 
-
-// ========================================
-// RESIZE
-// ========================================
+renderer.setAnimationLoop(animate);
 
 window.addEventListener("resize",()=>{
-
-    camera.aspect=innerWidth/innerHeight;
-
-    camera.updateProjectionMatrix();
-
-    renderer.setSize(innerWidth,innerHeight);
-
+camera.aspect=innerWidth/innerHeight;
+camera.updateProjectionMatrix();
+renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.35));
+renderer.setSize(innerWidth,innerHeight);
 });
 
-
-// ========================================
-// ERROR HANDLING
-// ========================================
-
-window.addEventListener("error",e=>{
-
-    console.error("Game error:",e.message);
-
+renderer.domElement.addEventListener("webglcontextlost",e=>{
+e.preventDefault();
+renderer.setAnimationLoop(null);
+showMessage("Mất kết nối WebGL. Hãy tải lại trang.");
 });
 
-console.log("GTA VI FANMADE v0.4 READY!");
-
+updateMoney();
+console.log("GTA VI FANMADE v0.7 READY!");
 </script>
-
 </body>
 </html>
