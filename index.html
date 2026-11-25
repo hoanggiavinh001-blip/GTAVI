@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>GTA VI FANMADE v0.8</title>
+<title>GTA VI FANMADE v0.9</title>
 
 <script type="importmap">
 {
@@ -16,46 +16,310 @@
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{overflow:hidden;background:#87ceeb;font-family:Arial,sans-serif;touch-action:none}
+
+body{
+overflow:hidden;
+background:#87ceeb;
+font-family:Arial,sans-serif;
+touch-action:none
+}
+
 #game{position:fixed;inset:0}
 canvas{display:block}
-#topUI{position:fixed;top:12px;left:12px;color:white;text-shadow:2px 2px 4px black;z-index:10;pointer-events:none}
-#title{color:#ffcf48;font-size:22px;font-weight:bold}
+
+#topUI{
+position:fixed;
+top:12px;
+left:12px;
+color:white;
+text-shadow:2px 2px 4px black;
+z-index:10;
+pointer-events:none
+}
+
+#title{
+color:#ffcf48;
+font-size:22px;
+font-weight:bold
+}
+
 #money{font-size:19px;margin-top:7px}
-#location{position:fixed;top:12px;right:12px;color:white;background:#182c3ddd;padding:10px;border-radius:9px;z-index:10}
-#minimap{position:fixed;top:65px;right:12px;width:130px;height:130px;background:#263d35;border:3px solid white;border-radius:12px;z-index:10}
-#mission{position:fixed;top:215px;left:12px;width:180px;padding:12px;background:#142735dd;color:white;border-radius:10px;font-size:12px;z-index:10}
-#mission button,#shop button,#saveMenu button{width:100%;border:0;border-radius:7px;padding:9px;margin-top:8px;background:#ffbf38;font-weight:bold}
-#joystick{position:fixed;bottom:22px;left:18px;width:140px;height:140px;z-index:20;touch-action:none}
-#joyBase{position:absolute;inset:7px;border-radius:50%;background:#263d49aa;border:3px solid #ffffff88}
-#joyKnob{position:absolute;width:55px;height:55px;border-radius:50%;background:#ffffffdd;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none}
-#buttons{position:fixed;right:15px;bottom:25px;display:grid;grid-template-columns:65px 65px;gap:10px;z-index:20}
-.gameBtn{height:55px;border:2px solid white;border-radius:13px;background:#172c3ddd;color:white;font-weight:bold;touch-action:none}
-#message{position:fixed;top:45%;left:50%;transform:translate(-50%,-50%);background:#111e;color:white;padding:13px 22px;border-radius:10px;display:none;z-index:50;text-align:center}
-#shop,#saveMenu{display:none;position:fixed;width:260px;top:50%;left:50%;transform:translate(-50%,-50%);padding:20px;background:#152b3af5;color:white;border-radius:15px;z-index:60;text-align:center}
-#weather{position:fixed;top:205px;right:15px;color:white;text-shadow:1px 1px 3px black;z-index:10}
-#instructions{position:fixed;bottom:175px;left:12px;color:white;background:#172c3dcc;padding:9px;border-radius:8px;font-size:11px;z-index:10}
+
+#location{
+position:fixed;
+top:12px;
+right:12px;
+color:white;
+background:#182c3ddd;
+padding:10px;
+border-radius:9px;
+z-index:10
+}
+
+#minimap{
+position:fixed;
+top:65px;
+right:12px;
+width:130px;
+height:130px;
+background:#263d35;
+border:3px solid white;
+border-radius:12px;
+z-index:10
+}
+
+#mission{
+position:fixed;
+top:215px;
+left:12px;
+width:180px;
+padding:12px;
+background:#142735dd;
+color:white;
+border-radius:10px;
+font-size:12px;
+z-index:10
+}
+
+#mission button,#shop button,#saveMenu button{
+width:100%;
+border:0;
+border-radius:7px;
+padding:9px;
+margin-top:8px;
+background:#ffbf38;
+font-weight:bold
+}
+
+#joystick{
+position:fixed;
+bottom:22px;
+left:18px;
+width:140px;
+height:140px;
+z-index:20;
+touch-action:none
+}
+
+#joyBase{
+position:absolute;
+inset:7px;
+border-radius:50%;
+background:#263d49aa;
+border:3px solid #ffffff88
+}
+
+#joyKnob{
+position:absolute;
+width:55px;
+height:55px;
+border-radius:50%;
+background:#ffffffdd;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+pointer-events:none
+}
+
+#buttons{
+position:fixed;
+right:15px;
+bottom:25px;
+display:grid;
+grid-template-columns:65px 65px;
+gap:10px;
+z-index:20
+}
+
+.gameBtn{
+height:55px;
+border:2px solid white;
+border-radius:13px;
+background:#172c3ddd;
+color:white;
+font-weight:bold;
+touch-action:none
+}
+
+#message{
+position:fixed;
+top:45%;
+left:50%;
+transform:translate(-50%,-50%);
+background:#111e;
+color:white;
+padding:13px 22px;
+border-radius:10px;
+display:none;
+z-index:50;
+text-align:center
+}
+
+#shop,#saveMenu{
+display:none;
+position:fixed;
+width:260px;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+padding:20px;
+background:#152b3af5;
+color:white;
+border-radius:15px;
+z-index:60;
+text-align:center
+}
+
+#weather{
+position:fixed;
+top:205px;
+right:15px;
+color:white;
+text-shadow:1px 1px 3px black;
+z-index:10
+}
+
+#instructions{
+position:fixed;
+bottom:175px;
+left:12px;
+color:white;
+background:#172c3dcc;
+padding:9px;
+border-radius:8px;
+font-size:11px;
+z-index:10
+}
+
+/* V0.9 UI */
+
+#crosshair{
+position:fixed;
+left:50%;
+top:50%;
+width:20px;
+height:20px;
+transform:translate(-50%,-50%);
+pointer-events:none;
+z-index:15
+}
+
+#crosshair:before{
+content:"";
+position:absolute;
+left:9px;
+top:0;
+width:2px;
+height:20px;
+background:white;
+box-shadow:0 0 4px black
+}
+
+#crosshair:after{
+content:"";
+position:absolute;
+left:0;
+top:9px;
+width:20px;
+height:2px;
+background:white;
+box-shadow:0 0 4px black
+}
+
+#backroomsTitle{
+position:fixed;
+top:18%;
+left:50%;
+transform:translateX(-50%);
+font-size:25px;
+font-weight:bold;
+color:#ffe58a;
+text-shadow:0 0 12px black;
+display:none;
+z-index:40;
+pointer-events:none
+}
+
+#backroomsHint{
+position:fixed;
+bottom:180px;
+left:50%;
+transform:translateX(-50%);
+background:#111d;
+color:white;
+padding:10px 15px;
+border-radius:9px;
+font-size:13px;
+display:none;
+z-index:40;
+pointer-events:none
+}
+
+#emoteButton{
+position:fixed;
+right:15px;
+bottom:165px;
+width:65px;
+height:45px;
+border:2px solid white;
+border-radius:12px;
+background:#263d49dd;
+color:white;
+font-weight:bold;
+z-index:25
+}
+
 @media(max-height:650px) and (max-width:799px){
-#mission{top:150px;width:165px;padding:9px}
+
+#mission{
+top:150px;
+width:165px;
+padding:9px
+}
+
 #weather{top:155px}
-#minimap{width:105px;height:105px}
-#joystick{width:120px;height:120px;bottom:12px}
-#buttons{bottom:12px;gap:7px;grid-template-columns:60px 60px}
+
+#minimap{
+width:105px;
+height:105px
+}
+
+#joystick{
+width:120px;
+height:120px;
+bottom:12px
+}
+
+#buttons{
+bottom:12px;
+gap:7px;
+grid-template-columns:60px 60px
+}
+
 .gameBtn{height:48px}
-#instructions{bottom:140px;font-size:10px}
+
+#instructions{
+bottom:140px;
+font-size:10px
+}
+
+#emoteButton{bottom:130px}
+
 }
 </style>
 </head>
 
 <body>
+
 <div id="game"></div>
 
 <div id="topUI">
-<div id="title">GTA VI FANMADE v0.8</div>
+<div id="title">GTA VI FANMADE v0.9</div>
 <div id="money">$500</div>
 </div>
 
 <div id="location">VICE CITY</div>
+
 <canvas id="minimap" width="260" height="260"></canvas>
 
 <div id="mission">
@@ -67,18 +331,24 @@ canvas{display:block}
 
 <div id="weather">☀️ SUNNY</div>
 
-<button id="timeButton" class="gameBtn" style="position:fixed;top:250px;right:15px;z-index:15;padding:8px 10px;height:auto">☀️ DAY</button>
+<button id="timeButton" class="gameBtn"
+style="position:fixed;top:250px;right:15px;z-index:15;padding:8px 10px;height:auto">
+☀️ DAY
+</button>
 
 <div id="instructions">
 WASD: Di chuyển<br>
 SHIFT: Chạy<br>
 E: Lên / xuống xe<br>
 SPACE: Nhảy<br>
+G: Vẫy tay<br>
 Vuốt màn hình: Xoay camera
 </div>
 
 <div id="joystick">
-<div id="joyBase"><div id="joyKnob"></div></div>
+<div id="joyBase">
+<div id="joyKnob"></div>
+</div>
 </div>
 
 <div id="buttons">
@@ -89,6 +359,12 @@ Vuốt màn hình: Xoay camera
 <button class="gameBtn" id="saveButton">SAVE</button>
 <button class="gameBtn" id="loadButton">LOAD</button>
 </div>
+
+<button id="emoteButton">EMOTE</button>
+
+<div id="crosshair"></div>
+<div id="backroomsTitle">THE BACKROOMS</div>
+<div id="backroomsHint">Tìm bức tường có chữ EXIT để trở về</div>
 
 <div id="message"></div>
 
@@ -107,23 +383,44 @@ Vuốt màn hình: Xoay camera
 </div>
 
 <script type="module">
+
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {clone as cloneSkeleton} from 'three/addons/utils/SkeletonUtils.js';
 
+
+// =====================================================
+// 1. SCENE
+// =====================================================
+
 const scene=new THREE.Scene();
+
 scene.background=new THREE.Color(0x91cce8);
 scene.fog=new THREE.Fog(0x91cce8,150,700);
 
-const camera=new THREE.PerspectiveCamera(65,innerWidth/innerHeight,.1,1200);
+const camera=new THREE.PerspectiveCamera(
+65,
+innerWidth/innerHeight,
+.1,
+1200
+);
+
 let renderer;
 
 try{
-renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:"high-performance"});
+
+renderer=new THREE.WebGLRenderer({
+antialias:true,
+powerPreference:"high-performance"
+});
+
 }catch(error){
+
 document.getElementById("message").style.display="block";
 document.getElementById("message").textContent="Thiết bị không hỗ trợ WebGL.";
+
 throw error;
+
 }
 
 renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.35));
@@ -131,121 +428,220 @@ renderer.setSize(innerWidth,innerHeight);
 renderer.outputColorSpace=THREE.SRGBColorSpace;
 renderer.shadowMap.enabled=true;
 renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+
 document.getElementById("game").appendChild(renderer.domElement);
 
 scene.add(new THREE.HemisphereLight(0xffffff,0x526b42,2));
 
 const sun=new THREE.DirectionalLight(0xffffff,2);
+
 sun.position.set(100,150,100);
 sun.castShadow=true;
 sun.shadow.mapSize.set(1024,1024);
+
 scene.add(sun);
 
 const loader=new GLTFLoader();
+
 const buildings=[];
+
+
+// =====================================================
+// 2. GROUND AND ROADS
+// =====================================================
 
 const ground=new THREE.Mesh(
 new THREE.PlaneGeometry(1100,1100),
 new THREE.MeshStandardMaterial({color:0x54864b})
 );
+
 ground.rotation.x=-Math.PI/2;
 ground.receiveShadow=true;
+
 scene.add(ground);
 
 function road(x,z,w,d){
+
 const mesh=new THREE.Mesh(
 new THREE.BoxGeometry(w,.12,d),
 new THREE.MeshStandardMaterial({color:0x303438})
 );
+
 mesh.position.set(x,0,z);
+
 scene.add(mesh);
+
 }
 
 for(let i=-500;i<=500;i+=100){
+
 road(i,0,23,1100);
 road(0,i,1100,23);
+
 }
 
 for(let i=-500;i<=500;i+=12){
+
 const line=new THREE.Mesh(
 new THREE.BoxGeometry(.25,.03,4),
 new THREE.MeshBasicMaterial({color:0xffffff})
 );
+
 line.position.set(i,.08,0);
+
 scene.add(line);
+
 }
 
-const buildingColors=[0xd9c4a5,0xc5d4dc,0xe2d4c5,0xa9b9c6,0xd7b5a1,0x9daea0];
+
+// =====================================================
+// 3. BUILDINGS
+// =====================================================
+
+const buildingColors=[
+0xd9c4a5,
+0xc5d4dc,
+0xe2d4c5,
+0xa9b9c6,
+0xd7b5a1,
+0x9daea0
+];
 
 function createBuilding(x,z,w,h,d){
+
 const group=new THREE.Group();
 
 const body=new THREE.Mesh(
 new THREE.BoxGeometry(w,h,d),
 new THREE.MeshStandardMaterial({
-color:buildingColors[Math.floor(Math.random()*buildingColors.length)]
+color:buildingColors[
+Math.floor(Math.random()*buildingColors.length)
+]
 })
 );
 
 body.position.y=h/2;
 body.castShadow=true;
 body.receiveShadow=true;
+
 group.add(body);
 
-const windowMat=new THREE.MeshStandardMaterial({color:0x65b5d6});
+const windowMat=new THREE.MeshStandardMaterial({
+color:0x65b5d6
+});
 
 for(let y=3;y<h-2;y+=3){
+
 for(let wx=-w/2+2;wx<w/2-1;wx+=4){
-const win=new THREE.Mesh(new THREE.BoxGeometry(1.5,1.4,.08),windowMat);
+
+const win=new THREE.Mesh(
+new THREE.BoxGeometry(1.5,1.4,.08),
+windowMat
+);
+
 win.position.set(wx,y,d/2+.05);
+
 group.add(win);
+
 }
+
 }
 
 group.position.set(x,0,z);
+
 scene.add(group);
-buildings.push({x,z,w,d});
+
+buildings.push({x,z,w,d,group});
+
+return group;
+
 }
 
 for(let x=-450;x<=450;x+=100){
+
 for(let z=-450;z<=450;z+=100){
+
 for(const sx of [-25,25]){
+
 for(const sz of [-25,25]){
-const bx=x+sx,bz=z+sz;
+
+const bx=x+sx;
+const bz=z+sz;
+
 if(Math.abs(bx-35)<18&&Math.abs(bz-35)<18)continue;
-createBuilding(bx,bz,20,18+Math.random()*55,20);
-}
-}
-}
+
+createBuilding(
+bx,
+bz,
+20,
+18+Math.random()*55,
+20
+);
+
 }
 
-// COLLISION
+}
+
+}
+
+}
+
+
+// =====================================================
+// 4. COLLISION
+// =====================================================
+
 function checkBuildingCollision(object,radius=.7){
+
 let collided=false;
 
 for(const b of buildings){
+
 const dx=object.position.x-b.x;
 const dz=object.position.z-b.z;
 
-if(Math.abs(dx)<b.w/2+radius&&Math.abs(dz)<b.d/2+radius){
+if(
+Math.abs(dx)<b.w/2+radius&&
+Math.abs(dz)<b.d/2+radius
+){
+
 collided=true;
 
 if(Math.abs(dx)>Math.abs(dz)){
-object.position.x=b.x+Math.sign(dx||1)*(b.w/2+radius);
+
+object.position.x=
+b.x+Math.sign(dx||1)*(b.w/2+radius);
+
 }else{
-object.position.z=b.z+Math.sign(dz||1)*(b.d/2+radius);
+
+object.position.z=
+b.z+Math.sign(dz||1)*(b.d/2+radius);
+
 }
+
 }
+
 }
 
 return collided;
+
 }
 
+
+// =====================================================
+// 5. MODEL NORMALIZATION
+// =====================================================
+
 function normalizeModel(model,height){
+
 const box=new THREE.Box3().setFromObject(model);
 const size=box.getSize(new THREE.Vector3());
 
-if(size.y>0)model.scale.multiplyScalar(height/size.y);
+if(size.y>0){
+
+model.scale.multiplyScalar(height/size.y);
+
+}
 
 const b=new THREE.Box3().setFromObject(model);
 const center=b.getCenter(new THREE.Vector3());
@@ -253,46 +649,83 @@ const center=b.getCenter(new THREE.Vector3());
 model.position.x-=center.x;
 model.position.z-=center.z;
 model.position.y-=b.min.y;
+
 }
 
+
+// =====================================================
+// 6. CHARACTER
+// =====================================================
+
 function createCharacter(color=0x0066ff){
+
 const rig=new THREE.Group();
+
 const mat=new THREE.MeshStandardMaterial({color});
 
-const torso=new THREE.Mesh(new THREE.BoxGeometry(.8,.9,.5),mat);
+const torso=new THREE.Mesh(
+new THREE.BoxGeometry(.8,.9,.5),
+mat
+);
+
 torso.position.y=1.3;
+
 rig.add(torso);
 
-const head=new THREE.Mesh(new THREE.BoxGeometry(.5,.5,.5),mat);
+const head=new THREE.Mesh(
+new THREE.BoxGeometry(.5,.5,.5),
+mat
+);
+
 head.position.y=2;
+
 rig.add(head);
 
 function limb(x,y){
+
 const pivot=new THREE.Group();
+
 pivot.position.set(x,y,0);
 
-const mesh=new THREE.Mesh(new THREE.BoxGeometry(.23,.8,.23),mat);
+const mesh=new THREE.Mesh(
+new THREE.BoxGeometry(.23,.8,.23),
+mat
+);
+
 mesh.position.y=-.4;
+
 pivot.add(mesh);
 rig.add(pivot);
 
 return pivot;
+
 }
 
 rig.userData.parts={
+
 torso,
+
 leftArm:limb(-.5,1.7),
 rightArm:limb(.5,1.7),
+
 leftLeg:limb(-.22,.9),
 rightLeg:limb(.22,.9)
+
 };
 
 return rig;
+
 }
 
-// PLAYER
+
+// =====================================================
+// 7. PLAYER
+// =====================================================
+
 const player=new THREE.Group();
+
 scene.add(player);
+
 player.position.set(0,0,0);
 
 let playerMixer=null;
@@ -301,173 +734,231 @@ let activePlayerAction=null;
 let playerModel=null;
 
 let playerRig=createCharacter();
+
 player.add(playerRig);
 
-loader.load('./jason_duval.glb',gltf=>{
+loader.load(
+'./jason_duval.glb',
+
+gltf=>{
+
 player.remove(playerRig);
+
 playerModel=gltf.scene;
+
 normalizeModel(playerModel,1.8);
+
 player.add(playerModel);
 
 if(gltf.animations.length){
+
 playerMixer=new THREE.AnimationMixer(playerModel);
 
 gltf.animations.forEach(clip=>{
-playerActions[clip.name.toLowerCase()]=playerMixer.clipAction(clip);
+
+playerActions[clip.name.toLowerCase()]=
+playerMixer.clipAction(clip);
+
 });
+
 }
-},undefined,()=>console.log("Dùng nhân vật mặc định"));
+
+},
+
+undefined,
+
+()=>console.log("Dùng nhân vật mặc định")
+
+);
 
 function playPlayerAnimation(type){
+
 if(!playerMixer)return;
 
 const names=Object.keys(playerActions);
+
 let name=names.find(n=>n.includes(type));
 
 if(!name&&names.length)name=names[0];
+
 if(!name)return;
 
 const next=playerActions[name];
 
 if(activePlayerAction!==next){
+
 next.reset();
 next.fadeIn(.2);
 
-if(activePlayerAction)activePlayerAction.fadeOut(.2);
+if(activePlayerAction){
+
+activePlayerAction.fadeOut(.2);
+
+}
 
 next.play();
+
 activePlayerAction=next;
-}
+
 }
 
-// NPC
+}
+
+
+// =====================================================
+// 8. NPC
+// =====================================================
+
 const npcs=[];
+
 let tommyModel=null;
 let tommyAnimations=[];
 
-loader.load('./tommy_vercetti_cutscene_model.glb',gltf=>{
+loader.load(
+'./tommy_vercetti_cutscene_model.glb',
+
+gltf=>{
+
 tommyModel=gltf.scene;
 tommyAnimations=gltf.animations||[];
+
 updateNPCModels();
-},undefined,()=>console.log("Dùng NPC mặc định"));
+
+},
+
+undefined,
+
+()=>console.log("Dùng NPC mặc định")
+
+);
 
 function createNPC(x,z){
+
 const object=new THREE.Group();
-const rig=createCharacter(new THREE.Color().setHSL(Math.random(),.65,.5));
+
+const rig=createCharacter(
+new THREE.Color().setHSL(Math.random(),.65,.5)
+);
 
 object.add(rig);
+
 object.position.set(x,0,z);
+
 scene.add(object);
 
 npcs.push({
-object,rig,
+
+object,
+rig,
+
 direction:Math.random()*Math.PI*2,
+
 timer:100+Math.random()*200,
+
 animationTime:Math.random()*10,
+
 walking:true,
+
 modelLoaded:false,
-mixer:null
+
+mixer:null,
+
+v09Dodging:false
+
 });
+
 }
 
 for(let i=0;i<30;i++){
-createNPC(Math.random()*300-150,Math.random()*300-150);
+
+createNPC(
+Math.random()*300-150,
+Math.random()*300-150
+);
+
 }
 
 function updateNPCModels(){
+
 if(!tommyModel)return;
 
 npcs.forEach(npc=>{
+
 if(npc.modelLoaded)return;
 
 const model=cloneSkeleton(tommyModel);
+
 normalizeModel(model,1.8);
 
 npc.object.remove(npc.rig);
 npc.object.add(model);
+
 npc.model=model;
 
 if(tommyAnimations.length){
+
 npc.mixer=new THREE.AnimationMixer(model);
 
-const clip=tommyAnimations.find(c=>/walk|run|idle/i.test(c.name))||tommyAnimations[0];
+const clip=
+tommyAnimations.find(c=>/walk|run|idle/i.test(c.name))
+||tommyAnimations[0];
 
 npc.walkAction=npc.mixer.clipAction(clip);
+
 npc.walkAction.play();
+
 }
 
 npc.modelLoaded=true;
+
 });
+
 }
 
-function updateNPCs(delta){
-npcs.forEach(npc=>{
-const obj=npc.object;
 
-npc.timer--;
+// =====================================================
+// 9. CARS
+// =====================================================
 
-if(npc.timer<=0){
-npc.direction=Math.random()*Math.PI*2;
-npc.timer=100+Math.random()*200;
-npc.walking=Math.random()>.2;
-}
-
-if(npc.walking){
-const old=obj.position.clone();
-
-obj.position.x+=Math.sin(npc.direction)*delta*2.5;
-obj.position.z+=Math.cos(npc.direction)*delta*2.5;
-
-obj.rotation.y=npc.direction;
-checkBuildingCollision(obj,.8);
-
-if(obj.position.distanceTo(old)<.05){
-npc.direction+=Math.PI*(.6+Math.random()*.8);
-}
-}
-
-obj.position.x=THREE.MathUtils.clamp(obj.position.x,-480,480);
-obj.position.z=THREE.MathUtils.clamp(obj.position.z,-480,480);
-
-npc.animationTime+=delta*8;
-
-if(npc.mixer)npc.mixer.update(delta);
-
-const parts=npc.rig.userData.parts;
-
-if(parts){
-const swing=npc.walking?Math.sin(npc.animationTime)*.5:0;
-
-parts.leftLeg.rotation.x=swing;
-parts.rightLeg.rotation.x=-swing;
-parts.leftArm.rotation.x=-swing;
-parts.rightArm.rotation.x=swing;
-}
-});
-}
-
-// CARS
 const cars=[];
+
 let carModel=null;
 
-loader.load('./3d_vapid_creado_gta_vi_game-ready_low_poly.glb',gltf=>{
+loader.load(
+'./3d_vapid_creado_gta_vi_game-ready_low_poly.glb',
+
+gltf=>{
+
 carModel=gltf.scene;
+
 normalizeModel(carModel,1.7);
+
 updateCarModels();
-},undefined,()=>console.log("Dùng xe mặc định"));
+
+},
+
+undefined,
+
+()=>console.log("Dùng xe mặc định")
+
+);
 
 function createCar(x,z,traffic=false){
+
 const object=new THREE.Group();
 
 const body=new THREE.Mesh(
 new THREE.BoxGeometry(2.2,.8,4.5),
+
 new THREE.MeshStandardMaterial({
 color:traffic?0x1565c0:0xc62828,
 metalness:.3
 })
+
 );
 
 body.position.y=.8;
+
 object.add(body);
 
 const cabin=new THREE.Mesh(
@@ -476,88 +967,128 @@ new THREE.MeshStandardMaterial({color:0x222222})
 );
 
 cabin.position.set(0,1.5,-.3);
+
 object.add(cabin);
 
 const wheels=[];
 
 for(const wx of [-1.1,1.1]){
+
 for(const wz of [-1.4,1.4]){
+
 const wheel=new THREE.Mesh(
 new THREE.CylinderGeometry(.4,.4,.25,16),
+
 new THREE.MeshStandardMaterial({color:0x111111})
 );
 
 wheel.rotation.z=Math.PI/2;
 wheel.position.set(wx,.4,wz);
+
 object.add(wheel);
+
 wheels.push(wheel);
+
 }
+
 }
 
 object.position.set(x,0,z);
+
 scene.add(object);
 
 const car={
-object,wheels,
+
+object,
+wheels,
+
 traffic,
+
 trafficSpeed:10+Math.random()*8,
+
 currentSpeed:10,
+
 direction:1,
+
 axis:"x",
+
 speed:0,
+
 damage:0,
-damageCooldown:0
+
+damageCooldown:0,
+
+v09BounceCooldown:0
+
 };
 
 cars.push(car);
+
 return car;
+
 }
 
 const playerCar=createCar(5,0,false);
 
-// Hướng đầu xe ra xa camera
 playerCar.object.rotation.y=Math.PI;
 
 for(let i=0;i<8;i++){
+
 const east=createCar(-450+i*80,-6,true);
+
 east.direction=1;
 east.axis="x";
 east.object.rotation.y=Math.PI/2;
 
 const west=createCar(450-i*80,6,true);
+
 west.direction=-1;
 west.axis="x";
 west.object.rotation.y=-Math.PI/2;
 
 const north=createCar(-6,-420+i*115,true);
+
 north.axis="z";
 north.direction=1;
 
 const south=createCar(6,420-i*115,true);
+
 south.axis="z";
 south.direction=-1;
 south.object.rotation.y=Math.PI;
+
 }
 
 function updateCarModels(){
+
 if(!carModel)return;
 
 cars.forEach(car=>{
+
 if(car.modelLoaded)return;
 
 const model=cloneSkeleton(carModel);
+
 car.object.add(model);
+
 car.modelLoaded=true;
+
 });
+
 }
 
-// SHOP
+
+// =====================================================
+// 10. SHOP
+// =====================================================
+
 const shopBuilding=new THREE.Mesh(
 new THREE.BoxGeometry(12,5,12),
 new THREE.MeshStandardMaterial({color:0xf0a32d})
 );
 
 shopBuilding.position.set(35,2.5,35);
+
 scene.add(shopBuilding);
 
 const shopRoof=new THREE.Mesh(
@@ -566,72 +1097,326 @@ new THREE.MeshStandardMaterial({color:0xb52c27})
 );
 
 shopRoof.position.set(35,5.4,35);
+
 scene.add(shopRoof);
 
-// PLAYER STATE
+
+// =====================================================
+// 11. BACKROOMS BUILDING
+// =====================================================
+
+const backroomsBuilding=new THREE.Group();
+
+const backroomsBody=new THREE.Mesh(
+new THREE.BoxGeometry(16,10,16),
+
+new THREE.MeshStandardMaterial({
+color:0x30343a,
+roughness:.8
+})
+);
+
+backroomsBody.position.y=5;
+
+backroomsBuilding.add(backroomsBody);
+
+const backroomsDoor=new THREE.Mesh(
+new THREE.BoxGeometry(5,6,.4),
+
+new THREE.MeshStandardMaterial({
+color:0x171717
+})
+);
+
+backroomsDoor.position.set(0,3,8.15);
+
+backroomsBuilding.add(backroomsDoor);
+
+const sign=new THREE.Mesh(
+new THREE.BoxGeometry(10,2,.5),
+
+new THREE.MeshBasicMaterial({
+color:0xffd52b
+})
+);
+
+sign.position.set(0,10,7);
+
+backroomsBuilding.add(sign);
+
+backroomsBuilding.position.set(65,0,65);
+
+scene.add(backroomsBuilding);
+
+
+// =====================================================
+// 12. BACKROOMS WORLD
+// =====================================================
+
+let backroomsMode=false;
+
+let backroomsReturnPoint=new THREE.Vector3();
+
+const backroomsGroup=new THREE.Group();
+
+const backFloor=new THREE.Mesh(
+new THREE.BoxGeometry(180,1,180),
+
+new THREE.MeshStandardMaterial({
+color:0x8e8247,
+roughness:1
+})
+);
+
+backFloor.position.y=-.6;
+
+backroomsGroup.add(backFloor);
+
+const backCeiling=new THREE.Mesh(
+new THREE.BoxGeometry(180,1,180),
+
+new THREE.MeshStandardMaterial({
+color:0xb4a95d
+})
+);
+
+backCeiling.position.y=9;
+
+backroomsGroup.add(backCeiling);
+
+const backWallMat=new THREE.MeshStandardMaterial({
+color:0xc5b85b,
+roughness:1
+});
+
+function createBackroomsWall(x,y,z,w,h,d){
+
+const wall=new THREE.Mesh(
+new THREE.BoxGeometry(w,h,d),
+backWallMat
+);
+
+wall.position.set(x,y,z);
+
+backroomsGroup.add(wall);
+
+}
+
+createBackroomsWall(0,4,-90,180,9,2);
+createBackroomsWall(0,4,90,180,9,2);
+createBackroomsWall(-90,4,0,2,9,180);
+createBackroomsWall(90,4,0,2,9,180);
+
+for(let i=-60;i<=60;i+=30){
+
+createBackroomsWall(i,4,-35,2,9,70);
+createBackroomsWall(i,4,35,2,9,70);
+
+}
+
+
+// =====================================================
+// 13. BACKROOMS LIGHTS
+// =====================================================
+
+const backroomsLights=[];
+
+for(let x=-70;x<=70;x+=20){
+
+for(let z=-70;z<=70;z+=25){
+
+const lamp=new THREE.Mesh(
+new THREE.BoxGeometry(5,.25,1.5),
+
+new THREE.MeshBasicMaterial({
+color:0xfff2a0
+})
+);
+
+lamp.position.set(x,8.3,z);
+
+backroomsGroup.add(lamp);
+
+const light=new THREE.PointLight(
+0xffe69b,
+1.2,
+22
+);
+
+light.position.set(x,7.5,z);
+
+backroomsGroup.add(light);
+
+backroomsLights.push(light);
+
+}
+
+}
+
+
+// =====================================================
+// 14. BACKROOMS EXIT
+// =====================================================
+
+const exitWall=new THREE.Mesh(
+new THREE.BoxGeometry(9,5,.5),
+
+new THREE.MeshStandardMaterial({
+color:0x245a37,
+emissive:0x12351e
+})
+);
+
+exitWall.position.set(0,2.5,-82);
+
+backroomsGroup.add(exitWall);
+
+const exitText=document.createElement("div");
+
+exitText.style.position="fixed";
+exitText.style.left="50%";
+exitText.style.top="50%";
+exitText.style.transform="translate(-50%,-50%)";
+exitText.style.color="#6aff91";
+exitText.style.fontSize="27px";
+exitText.style.fontWeight="bold";
+exitText.style.textShadow="0 0 10px black";
+exitText.style.pointerEvents="none";
+exitText.style.display="none";
+exitText.style.zIndex="45";
+
+exitText.textContent="EXIT";
+
+document.body.appendChild(exitText);
+
+scene.add(backroomsGroup);
+
+backroomsGroup.visible=false;
+
+
+// =====================================================
+// 15. PLAYER STATE
+// =====================================================
+
 let money=500;
+
 let health=100;
+
 let inventory=[];
+
 let outfit=0;
 
 let currentCar=null;
+
 let missionActive=false;
+
 let missionTarget=null;
+
 let missionReward=0;
 
+
+// =====================================================
+// 16. MONEY AND MESSAGE
+// =====================================================
+
 function updateMoney(){
+
 document.getElementById("money").textContent="$"+money;
+
 document.getElementById("shopMoney").textContent="$"+money;
+
 }
 
 function showMessage(text){
+
 const box=document.getElementById("message");
 
 box.textContent=text;
+
 box.style.display="block";
 
 clearTimeout(showMessage.timer);
 
 showMessage.timer=setTimeout(()=>{
+
 box.style.display="none";
+
 },2200);
+
 }
 
 function damageCar(car,amount){
+
 if(car.damageCooldown>0)return;
 
 car.damage=Math.min(car.damage+amount,100);
+
 car.damageCooldown=.8;
 
 const scale=1-car.damage/250;
+
 car.object.scale.set(scale,1,scale);
 
-if(car.damage>=50)showMessage("Xe bị hư hại!");
+if(car.damage>=50){
+
+showMessage("Xe bị hư hại!");
+
 }
 
-// MOVEMENT
+}
+
+
+// =====================================================
+// 17. KEYBOARD
+// =====================================================
+
 const keys={};
 
 window.addEventListener("keydown",e=>{
+
 keys[e.key.toLowerCase()]=true;
 
-if(e.key.toLowerCase()==="e"&&!e.repeat)toggleCar();
-if(e.code==="Space"&&!e.repeat)jump();
+if(e.key.toLowerCase()==="e"&&!e.repeat){
+
+toggleCar();
+
+}
+
+if(e.code==="Space"&&!e.repeat){
+
+jump();
+
+}
+
+if(e.key.toLowerCase()==="g"&&!e.repeat){
+
+playEmote();
+
+}
+
 });
 
 window.addEventListener("keyup",e=>{
+
 keys[e.key.toLowerCase()]=false;
+
 });
 
-// JOYSTICK
+
+// =====================================================
+// 18. JOYSTICK
+// =====================================================
+
 let joy={x:0,y:0};
 
 const joyBase=document.getElementById("joyBase");
+
 const joyKnob=document.getElementById("joyKnob");
 
 let joyPointer=null;
 
 function setJoystick(e){
+
 const r=joyBase.getBoundingClientRect();
 
 const cx=r.left+r.width/2;
@@ -641,172 +1426,268 @@ let dx=e.clientX-cx;
 let dy=e.clientY-cy;
 
 const max=r.width*.34;
+
 const len=Math.hypot(dx,dy);
 
 if(len>max){
+
 dx=dx/len*max;
 dy=dy/len*max;
+
 }
 
 joy.x=dx/max;
 joy.y=dy/max;
 
 joyKnob.style.left=`${50+joy.x*34}%`;
+
 joyKnob.style.top=`${50+joy.y*34}%`;
+
 }
 
-document.getElementById("joystick").addEventListener("pointerdown",e=>{
+document.getElementById("joystick").addEventListener(
+"pointerdown",
+e=>{
+
 e.preventDefault();
 
 joyPointer=e.pointerId;
+
 e.currentTarget.setPointerCapture(e.pointerId);
 
 setJoystick(e);
-});
 
-document.getElementById("joystick").addEventListener("pointermove",e=>{
-if(e.pointerId===joyPointer)setJoystick(e);
-});
+}
+);
+
+document.getElementById("joystick").addEventListener(
+"pointermove",
+e=>{
+
+if(e.pointerId===joyPointer){
+
+setJoystick(e);
+
+}
+
+}
+);
 
 function resetJoy(){
+
 joyPointer=null;
+
 joy.x=0;
 joy.y=0;
 
 joyKnob.style.left="50%";
 joyKnob.style.top="50%";
+
 }
 
 document.getElementById("joystick").addEventListener("pointerup",resetJoy);
+
 document.getElementById("joystick").addEventListener("pointercancel",resetJoy);
+
 document.getElementById("joystick").addEventListener("lostpointercapture",resetJoy);
 
-// CAMERA CONTROL
+
+// =====================================================
+// 19. CAMERA
+// =====================================================
+
 let cameraAngle=0;
+
 let cameraPitch=.32;
 
 let dragging=false;
-let lastX=0,lastY=0;
+
+let lastX=0;
+let lastY=0;
 
 renderer.domElement.addEventListener("pointerdown",e=>{
+
 dragging=true;
+
 lastX=e.clientX;
 lastY=e.clientY;
+
 });
 
-window.addEventListener("pointerup",()=>dragging=false);
+window.addEventListener("pointerup",()=>{
+
+dragging=false;
+
+});
 
 window.addEventListener("pointermove",e=>{
+
 if(!dragging)return;
 
 cameraAngle-=(e.clientX-lastX)*.006;
 
 cameraPitch=THREE.MathUtils.clamp(
 cameraPitch+(e.clientY-lastY)*.003,
-.12,.8
+.12,
+.8
 );
 
 lastX=e.clientX;
 lastY=e.clientY;
+
 });
 
-// CAMERA RELATIVE MOVEMENT
+
+// =====================================================
+// 20. PLAYER MOVEMENT
+// =====================================================
+
 function movePlayer(delta){
+
 if(currentCar)return;
 
 let forward=0;
 let side=0;
 
 if(keys.w||keys.arrowup)forward+=1;
+
 if(keys.s||keys.arrowdown)forward-=1;
 
 if(keys.a||keys.arrowleft)side-=1;
+
 if(keys.d||keys.arrowright)side+=1;
 
-// Kéo joystick lên = tiến
 forward+=-joy.y;
+
 side+=joy.x;
 
 const len=Math.hypot(forward,side);
 
 if(len>1){
+
 forward/=len;
 side/=len;
+
 }
 
-const speed=(keys.shift||document.getElementById("run").dataset.down==="1")?9:5;
+const speed=
+(keys.shift||document.getElementById("run").dataset.down==="1")
+?9:5;
 
-// Đã sửa chiều di chuyển theo hướng camera
-const dx=(-Math.sin(cameraAngle)*forward+Math.cos(cameraAngle)*side)*speed*delta;
-const dz=(-Math.cos(cameraAngle)*forward-Math.sin(cameraAngle)*side)*speed*delta;
+const dx=(
+-Math.sin(cameraAngle)*forward+
+Math.cos(cameraAngle)*side
+)*speed*delta;
+
+const dz=(
+-Math.cos(cameraAngle)*forward-
+Math.sin(cameraAngle)*side
+)*speed*delta;
 
 const old=player.position.clone();
 
 player.position.x+=dx;
+
 player.position.z+=dz;
 
 checkBuildingCollision(player,.7);
 
 if(player.position.distanceTo(old)>.001){
+
 player.rotation.y=Math.atan2(dx,dz);
 
 const parts=playerRig.userData.parts;
 
 if(parts){
+
 const swing=Math.sin(performance.now()*.012)*.55;
 
 parts.leftLeg.rotation.x=swing;
 parts.rightLeg.rotation.x=-swing;
+
 parts.leftArm.rotation.x=-swing;
 parts.rightArm.rotation.x=swing;
+
 }
 
 playPlayerAnimation(speed>5?"run":"walk");
 
 }else{
+
 playPlayerAnimation("idle");
-}
+
 }
 
-// JUMP
+}
+
+
+// =====================================================
+// 21. JUMP
+// =====================================================
+
 let verticalVelocity=0;
+
 let grounded=true;
 
 function jump(){
+
 if(!grounded||currentCar)return;
 
 verticalVelocity=6;
+
 grounded=false;
+
 }
 
-document.getElementById("jump").addEventListener("pointerdown",jump);
+document.getElementById("jump").addEventListener(
+"pointerdown",
+jump
+);
 
-document.getElementById("run").addEventListener("pointerdown",e=>{
+document.getElementById("run").addEventListener(
+"pointerdown",
+e=>{
+
 e.currentTarget.dataset.down="1";
-});
 
-document.getElementById("run").addEventListener("pointerup",e=>{
+}
+);
+
+document.getElementById("run").addEventListener(
+"pointerup",
+e=>{
+
 e.currentTarget.dataset.down="0";
-});
 
-document.getElementById("run").addEventListener("pointercancel",e=>{
+}
+);
+
+document.getElementById("run").addEventListener(
+"pointercancel",
+e=>{
+
 e.currentTarget.dataset.down="0";
-});
 
-// CAR CONTROLS
+}
+);
+
+
+// =====================================================
+// 22. ENTER AND EXIT CAR
+// =====================================================
+
 function toggleCar(){
 
-// ĐANG Ở TRONG XE -> XUỐNG XE
 if(currentCar){
 
 const car=currentCar;
 
-// Đặt nhân vật cạnh xe
 const exitOffset=new THREE.Vector3(1,0,0)
 .applyQuaternion(car.object.quaternion)
 .multiplyScalar(3);
 
 player.position.copy(car.object.position).add(exitOffset);
+
 player.position.y=0;
 
 checkBuildingCollision(player,.8);
@@ -814,220 +1695,549 @@ checkBuildingCollision(player,.8);
 car.speed=0;
 
 currentCar=null;
+
 player.visible=true;
 
 showMessage("Đã xuống xe");
 
 }else{
 
-// TÌM XE GẦN NHẤT
 let nearest=null;
+
 let dist=11;
 
 cars.forEach(car=>{
+
 if(car.traffic)return;
 
 const d=player.position.distanceTo(car.object.position);
 
 if(d<dist){
+
 dist=d;
 nearest=car;
+
 }
+
 });
 
 if(nearest){
 
 currentCar=nearest;
+
 player.position.copy(nearest.object.position);
 
-// Ẩn nhân vật khi đang ngồi trong xe
 player.visible=false;
 
-showMessage("Đã lên xe! Dùng joystick để lái, nhấn E để xuống.");
+showMessage("Đã lên xe! Dùng joystick để lái.");
 
 }else{
+
 showMessage("Hãy đến gần chiếc xe màu đỏ rồi nhấn CAR hoặc E.");
+
 }
 
 }
+
 }
 
-document.getElementById("carButton").addEventListener("pointerdown",e=>{
+document.getElementById("carButton").addEventListener(
+"pointerdown",
+e=>{
+
 e.preventDefault();
-toggleCar();
-});
 
-// CAMERA
+toggleCar();
+
+}
+);
+
+
+// =====================================================
+// 23. CAMERA UPDATE
+// =====================================================
+
 function updateCamera(){
-const target=currentCar?currentCar.object.position:player.position;
+
+const target=currentCar
+?currentCar.object.position
+:player.position;
 
 const distance=currentCar?12:9;
+
 const horizontal=Math.cos(cameraPitch)*distance;
 
 camera.position.set(
+
 target.x+Math.sin(cameraAngle)*horizontal,
+
 target.y+3+Math.sin(cameraPitch)*distance,
+
 target.z+Math.cos(cameraAngle)*horizontal
+
 );
 
-camera.lookAt(target.x,target.y+1,target.z);
+camera.lookAt(
+target.x,
+target.y+1,
+target.z
+);
+
 }
 
-// TRAFFIC AI
+
+// =====================================================
+// 24. NPC AI
+// =====================================================
+
+function updateNPCs(delta){
+
+npcs.forEach(npc=>{
+
+const obj=npc.object;
+
+npc.timer--;
+
+if(npc.timer<=0){
+
+npc.direction=Math.random()*Math.PI*2;
+
+npc.timer=100+Math.random()*200;
+
+npc.walking=Math.random()>.2;
+
+}
+
+if(npc.walking){
+
+const old=obj.position.clone();
+
+obj.position.x+=Math.sin(npc.direction)*delta*2.5;
+
+obj.position.z+=Math.cos(npc.direction)*delta*2.5;
+
+obj.rotation.y=npc.direction;
+
+checkBuildingCollision(obj,.8);
+
+if(obj.position.distanceTo(old)<.05){
+
+npc.direction+=Math.PI*(.6+Math.random()*.8);
+
+}
+
+}
+
+obj.position.x=THREE.MathUtils.clamp(
+obj.position.x,
+-480,
+480
+);
+
+obj.position.z=THREE.MathUtils.clamp(
+obj.position.z,
+-480,
+480
+);
+
+npc.animationTime+=delta*8;
+
+if(npc.mixer){
+
+npc.mixer.update(delta);
+
+}
+
+const parts=npc.rig.userData.parts;
+
+if(parts){
+
+const swing=npc.walking
+?Math.sin(npc.animationTime)*.5
+:0;
+
+parts.leftLeg.rotation.x=swing;
+parts.rightLeg.rotation.x=-swing;
+
+parts.leftArm.rotation.x=-swing;
+parts.rightArm.rotation.x=swing;
+
+}
+
+});
+
+}
+
+
+// =====================================================
+// 25. NPC VEHICLE AVOIDANCE
+// =====================================================
+
+function updateNPCAvoidance(delta){
+
+if(backroomsMode)return;
+
+npcs.forEach(npc=>{
+
+const npcPos=npc.object.position;
+
+let nearestCar=null;
+
+let nearestDistance=12;
+
+cars.forEach(car=>{
+
+const distance=npcPos.distanceTo(
+car.object.position
+);
+
+if(distance<nearestDistance){
+
+nearestDistance=distance;
+
+nearestCar=car;
+
+}
+
+});
+
+if(!nearestCar)return;
+
+if(nearestDistance<9){
+
+const away=new THREE.Vector3()
+.subVectors(
+npcPos,
+nearestCar.object.position
+);
+
+away.y=0;
+
+if(away.lengthSq()>.001){
+
+away.normalize();
+
+npc.object.position.add(
+away.multiplyScalar(delta*5)
+);
+
+npc.object.rotation.y=Math.atan2(
+away.x,
+away.z
+);
+
+npc.walking=true;
+
+npc.timer=40;
+
+npc.v09Dodging=true;
+
+}
+
+}else{
+
+npc.v09Dodging=false;
+
+}
+
+});
+
+}
+
+
+// =====================================================
+// 26. TRAFFIC AND PLAYER CAR
+// =====================================================
+
 function updateCars(delta){
 
 cars.forEach(car=>{
 
 if(car.damageCooldown>0){
-car.damageCooldown=Math.max(0,car.damageCooldown-delta);
+
+car.damageCooldown=Math.max(
+0,
+car.damageCooldown-delta
+);
+
+}
+
+if(car.v09BounceCooldown>0){
+
+car.v09BounceCooldown=Math.max(
+0,
+car.v09BounceCooldown-delta
+);
+
 }
 
 const obj=car.object;
 
-// NPC TRAFFIC
 if(car.traffic){
 
 let target=car.trafficSpeed;
 
 for(const other of cars){
+
 if(other===car||!other.traffic)continue;
 
-if(other.direction!==car.direction||other.axis!==car.axis)continue;
+if(
+other.direction!==car.direction||
+other.axis!==car.axis
+)continue;
 
 if(obj.position.distanceTo(other.object.position)<10){
+
 target=0;
+
 }
+
 }
 
 car.currentSpeed=THREE.MathUtils.lerp(
-car.currentSpeed,target,delta*2
+car.currentSpeed,
+target,
+delta*2
 );
 
 if(car.axis==="z"){
 
-obj.position.z+=car.currentSpeed*delta*car.direction;
+obj.position.z+=
+car.currentSpeed*delta*car.direction;
 
 obj.rotation.y=car.direction===1?0:Math.PI;
 
-if(car.direction===1&&obj.position.z>500)obj.position.z=-500;
-if(car.direction===-1&&obj.position.z<-500)obj.position.z=500;
+if(car.direction===1&&obj.position.z>500){
+
+obj.position.z=-500;
+
+}
+
+if(car.direction===-1&&obj.position.z<-500){
+
+obj.position.z=500;
+
+}
 
 }else{
 
-obj.position.x+=car.currentSpeed*delta*car.direction;
+obj.position.x+=
+car.currentSpeed*delta*car.direction;
 
-obj.rotation.y=car.direction===1?Math.PI/2:-Math.PI/2;
+obj.rotation.y=
+car.direction===1?Math.PI/2:-Math.PI/2;
 
-if(car.direction===1&&obj.position.x>500)obj.position.x=-500;
-if(car.direction===-1&&obj.position.x<-500)obj.position.x=500;
+if(car.direction===1&&obj.position.x>500){
+
+obj.position.x=-500;
+
+}
+
+if(car.direction===-1&&obj.position.x<-500){
+
+obj.position.x=500;
 
 }
 
 }
 
-// PLAYER CAR
+}
+
 else if(currentCar===car){
 
-const accel=(keys.w||keys.arrowup||joy.y<-.2)?1:0;
-const brake=(keys.s||keys.arrowdown||joy.y>.2)?1:0;
+const accel=(
+keys.w||
+keys.arrowup||
+joy.y<-.2
+)?1:0;
+
+const brake=(
+keys.s||
+keys.arrowdown||
+joy.y>.2
+)?1:0;
 
 car.speed+=accel*18*delta;
+
 car.speed-=brake*24*delta;
 
 car.speed*=Math.pow(.985,delta*60);
 
-car.speed=THREE.MathUtils.clamp(car.speed,-12,30);
+car.speed=THREE.MathUtils.clamp(
+car.speed,
+-12,
+30
+);
 
-// Steering
 if(keys.a||keys.arrowleft||joy.x<-.2){
+
 obj.rotation.y+=2*delta*(car.speed>=0?1:-1);
+
 }
 
 if(keys.d||keys.arrowright||joy.x>.2){
+
 obj.rotation.y-=2*delta*(car.speed>=0?1:-1);
+
 }
 
-// Move car
-obj.position.x+=Math.sin(obj.rotation.y)*car.speed*delta;
-obj.position.z+=Math.cos(obj.rotation.y)*car.speed*delta;
+obj.position.x+=
+Math.sin(obj.rotation.y)*car.speed*delta;
 
-// Chỉ gây hư hại khi thật sự va vào nhà
+obj.position.z+=
+Math.cos(obj.rotation.y)*car.speed*delta;
+
 const hitBuilding=checkBuildingCollision(obj,2);
 
 if(hitBuilding&&Math.abs(car.speed)>5){
-damageCar(car,Math.min(8,Math.abs(car.speed)*.12));
+
+damageCar(
+car,
+Math.min(8,Math.abs(car.speed)*.12)
+);
+
 car.speed*=-.22;
-}
 
-// Va chạm xe khác
-for(const other of cars){
-
-if(other===car||other.traffic)continue;
-
-if(obj.position.distanceTo(other.object.position)<3.1){
-
-damageCar(car,3);
-car.speed*=-.25;
-
-const push=obj.position.clone().sub(other.object.position);
-
-if(push.lengthSq()>.001){
-obj.position.add(push.normalize().multiplyScalar(.7));
-}
-
-}
 }
 
 }
 
 });
+
 }
 
-// MISSIONS
+
+// =====================================================
+// 27. ARCADE CAR COLLISIONS
+// =====================================================
+
+function updateCarBounces(){
+
+if(!currentCar)return;
+
+const car=currentCar;
+
+if(car.v09BounceCooldown>0)return;
+
+cars.forEach(other=>{
+
+if(other===car)return;
+
+const distance=car.object.position.distanceTo(
+other.object.position
+);
+
+if(distance<3.5){
+
+car.v09BounceCooldown=.6;
+
+other.v09BounceCooldown=.6;
+
+car.speed*=-.35;
+
+if(other.traffic){
+
+other.currentSpeed*=.45;
+
+}
+
+const direction=new THREE.Vector3()
+.subVectors(
+car.object.position,
+other.object.position
+);
+
+if(direction.lengthSq()>.001){
+
+direction.normalize();
+
+car.object.position.add(
+direction.multiplyScalar(1.2)
+);
+
+}
+
+showMessage("Va chạm xe! 🚗");
+
+}
+
+});
+
+}
+
+
+// =====================================================
+// 28. MISSIONS
+// =====================================================
+
 const missionSpots=[
+
 {x:120,z:100,name:"Giao hàng tại Downtown",reward:300},
+
 {x:-180,z:220,name:"Đến bến cảng",reward:450},
+
 {x:300,z:-200,name:"Khám phá khu phố",reward:250},
+
 {x:-320,z:-150,name:"Đến khu trung tâm",reward:350}
+
 ];
 
 function startMission(){
 
-const m=missionSpots[Math.floor(Math.random()*missionSpots.length)];
+const m=missionSpots[
+Math.floor(Math.random()*missionSpots.length)
+];
 
 missionTarget=new THREE.Vector3(m.x,0,m.z);
+
 missionReward=m.reward;
+
 missionActive=true;
 
 document.getElementById("missionName").textContent=m.name;
-document.getElementById("missionReward").textContent="Reward: $"+m.reward;
+
+document.getElementById("missionReward").textContent=
+"Reward: $"+m.reward;
 
 showMessage("Nhiệm vụ mới: "+m.name);
+
 }
 
-document.getElementById("startMission").addEventListener("click",startMission);
+document.getElementById("startMission").addEventListener(
+"click",
+startMission
+);
 
 function updateMission(){
 
 if(!missionActive)return;
 
-const pos=currentCar?currentCar.object.position:player.position;
+const pos=currentCar
+?currentCar.object.position
+:player.position;
 
 if(pos.distanceTo(missionTarget)<9){
 
 money+=missionReward;
+
 updateMoney();
 
 missionActive=false;
 
 showMessage("Hoàn thành nhiệm vụ! +$"+missionReward);
 
-document.getElementById("missionName").textContent="Đã hoàn thành!";
-}
+document.getElementById("missionName").textContent=
+"Đã hoàn thành!";
 
 }
 
-// WEATHER
+}
+
+
+// =====================================================
+// 29. WEATHER
+// =====================================================
+
 let weatherMode="sunny";
 
 function changeWeather(){
@@ -1037,149 +2247,542 @@ weatherMode=weatherMode==="sunny"?"rain":"sunny";
 document.getElementById("weather").textContent=
 weatherMode==="sunny"?"☀️ SUNNY":"🌧️ RAIN";
 
-scene.fog.color.set(weatherMode==="sunny"?0x91cce8:0x526a82);
-scene.background.set(weatherMode==="sunny"?0x91cce8:0x526a82);
+scene.fog.color.set(
+weatherMode==="sunny"?0x91cce8:0x526a82
+);
+
+scene.background.set(
+weatherMode==="sunny"?0x91cce8:0x526a82
+);
 
 }
 
 let weatherTimer=0;
 
-// DAY AND NIGHT
+
+// =====================================================
+// 30. DAY AND NIGHT
+// =====================================================
+
 let timeOfDay="day";
 
-document.getElementById("timeButton").addEventListener("click",()=>{
+document.getElementById("timeButton").addEventListener(
+"click",
+()=>{
 
 timeOfDay=timeOfDay==="day"?"night":"day";
 
 if(timeOfDay==="night"){
 
 scene.background.set(0x101b35);
+
 scene.fog.color.set(0x18233b);
 
 sun.intensity=.35;
+
 sun.color.set(0x9bbcff);
 
-document.getElementById("timeButton").textContent="🌙 NIGHT";
+document.getElementById("timeButton").textContent=
+"🌙 NIGHT";
 
 }else{
 
-scene.background.set(weatherMode==="rain"?0x526a82:0x91cce8);
+scene.background.set(
+weatherMode==="rain"?0x526a82:0x91cce8
+);
+
 scene.fog.color.copy(scene.background);
 
 sun.intensity=2;
+
 sun.color.set(0xffffff);
 
-document.getElementById("timeButton").textContent="☀️ DAY";
+document.getElementById("timeButton").textContent=
+"☀️ DAY";
 
 }
 
-});
+}
+);
 
-// SHOP
+
+// =====================================================
+// 31. SHOP SYSTEM
+// =====================================================
+
 function openShop(){
+
 document.getElementById("shop").style.display="block";
+
 updateMoney();
+
 }
 
 function closeShop(){
+
 document.getElementById("shop").style.display="none";
+
 }
 
-document.getElementById("shopButton").addEventListener("click",()=>{
+document.getElementById("shopButton").addEventListener(
+"click",
+()=>{
 
-if(player.position.distanceTo(new THREE.Vector3(35,0,35))<18){
+if(
+player.position.distanceTo(
+new THREE.Vector3(35,0,35)
+)<18
+){
+
 openShop();
+
 }else{
+
 showMessage("Hãy đến cửa hàng trước!");
+
 }
 
-});
+}
+);
 
-document.getElementById("closeShop").addEventListener("click",closeShop);
+document.getElementById("closeShop").addEventListener(
+"click",
+closeShop
+);
 
-document.getElementById("buyHealth").addEventListener("click",()=>{
+document.getElementById("buyHealth").addEventListener(
+"click",
+()=>{
 
-if(money<50)return showMessage("Không đủ tiền!");
+if(money<50){
+
+return showMessage("Không đủ tiền!");
+
+}
 
 money-=50;
+
 health=100;
 
 updateMoney();
+
 showMessage("Đã hồi phục sức khỏe");
 
-});
+}
+);
 
-document.getElementById("buyOutfit").addEventListener("click",()=>{
+document.getElementById("buyOutfit").addEventListener(
+"click",
+()=>{
 
-if(money<100)return showMessage("Không đủ tiền!");
+if(money<100){
+
+return showMessage("Không đủ tiền!");
+
+}
 
 money-=100;
+
 outfit++;
 
 updateMoney();
+
 showMessage("Đã mua trang phục!");
+
+}
+);
+
+
+// =====================================================
+// 32. BACKROOMS ENTER
+// =====================================================
+
+function enterBackrooms(){
+
+if(backroomsMode)return;
+
+const position=currentCar
+?currentCar.object.position
+:player.position;
+
+backroomsReturnPoint.copy(position);
+
+if(currentCar){
+
+currentCar.speed=0;
+
+currentCar.object.position.set(0,0,0);
+
+}
+
+player.position.set(0,0,0);
+
+backroomsGroup.visible=true;
+
+backroomsMode=true;
+
+scene.background.set(0xb7a957);
+
+scene.fog.color.set(0x9e934d);
+
+scene.fog.near=25;
+
+scene.fog.far=150;
+
+document.getElementById("backroomsTitle").style.display="block";
+
+document.getElementById("backroomsHint").style.display="block";
+
+document.getElementById("location").textContent=
+"THE BACKROOMS";
+
+showMessage("Bạn đã bước vào Backrooms!");
+
+}
+
+
+// =====================================================
+// 33. BACKROOMS EXIT
+// =====================================================
+
+function exitBackrooms(){
+
+if(!backroomsMode)return;
+
+backroomsMode=false;
+
+backroomsGroup.visible=false;
+
+player.position.copy(backroomsReturnPoint);
+
+player.position.x+=5;
+
+if(currentCar){
+
+currentCar.object.position.copy(player.position);
+
+currentCar.speed=0;
+
+}
+
+scene.background.set(
+weatherMode==="rain"?0x526a82:0x91cce8
+);
+
+scene.fog.color.set(
+weatherMode==="rain"?0x526a82:0x91cce8
+);
+
+scene.fog.near=150;
+
+scene.fog.far=700;
+
+document.getElementById("backroomsTitle").style.display="none";
+
+document.getElementById("backroomsHint").style.display="none";
+
+exitText.style.display="none";
+
+document.getElementById("location").textContent="VICE CITY";
+
+showMessage("Đã trở về Vice City!");
+
+}
+
+
+// =====================================================
+// 34. BACKROOMS PORTAL DETECTION
+// =====================================================
+
+function updateBackrooms(){
+
+const position=currentCar
+?currentCar.object.position
+:player.position;
+
+if(!backroomsMode){
+
+if(
+Math.abs(position.x-65)<10&&
+Math.abs(position.z-65)<10
+){
+
+enterBackrooms();
+
+}
+
+}else{
+
+position.x=THREE.MathUtils.clamp(
+position.x,
+-85,
+85
+);
+
+position.z=THREE.MathUtils.clamp(
+position.z,
+-85,
+85
+);
+
+if(
+Math.abs(position.x)<7&&
+position.z<-76
+){
+
+exitBackrooms();
+
+}
+
+}
+
+}
+
+
+// =====================================================
+// 35. BACKROOMS FLICKERING LIGHTS
+// =====================================================
+
+let flickerTimer=0;
+
+function updateBackroomsLights(delta){
+
+if(!backroomsMode)return;
+
+flickerTimer+=delta;
+
+if(flickerTimer>1.5){
+
+flickerTimer=0;
+
+backroomsLights.forEach(light=>{
+
+light.intensity=Math.random()>.12?1.2:.15;
 
 });
 
-// SAVE / LOAD
+}
+
+}
+
+
+// =====================================================
+// 36. BACKROOMS ATMOSPHERE
+// =====================================================
+
+let atmosphereTimer=0;
+
+function updateBackroomsAtmosphere(delta){
+
+if(!backroomsMode)return;
+
+atmosphereTimer+=delta;
+
+if(atmosphereTimer>25){
+
+atmosphereTimer=0;
+
+showMessage("Tiếng đèn điện vang lên trong hành lang...");
+
+}
+
+}
+
+
+// =====================================================
+// 37. PLAYER EMOTE
+// =====================================================
+
+let emoteTimer=0;
+
+function playEmote(){
+
+if(currentCar){
+
+showMessage("Hãy xuống xe để thực hiện!");
+
+return;
+
+}
+
+if(emoteTimer>0)return;
+
+emoteTimer=1.2;
+
+const parts=playerRig.userData.parts;
+
+if(parts){
+
+const start=performance.now();
+
+function animateEmote(){
+
+const elapsed=(performance.now()-start)/1000;
+
+if(elapsed>.9){
+
+parts.rightArm.rotation.x=0;
+
+return;
+
+}
+
+parts.rightArm.rotation.x=
+-2.5+Math.sin(elapsed*15)*.35;
+
+requestAnimationFrame(animateEmote);
+
+}
+
+animateEmote();
+
+}
+
+showMessage("Nhân vật đang vẫy tay!");
+
+}
+
+document.getElementById("emoteButton").addEventListener(
+"pointerdown",
+playEmote
+);
+
+
+// =====================================================
+// 38. SAVE GAME
+// =====================================================
+
 function saveGame(){
 
 const data={
+
 position:{
+
 x:player.position.x,
 y:player.position.y,
 z:player.position.z
+
 },
-money,health,inventory,outfit
+
+money,
+health,
+inventory,
+outfit,
+
+backroomsReturnPoint:{
+
+x:backroomsReturnPoint.x,
+y:backroomsReturnPoint.y,
+z:backroomsReturnPoint.z
+
+}
+
 };
 
-localStorage.setItem("gtavi_save_v07",JSON.stringify(data));
+localStorage.setItem(
+"gtavi_save_v09",
+JSON.stringify(data)
+);
 
 document.getElementById("saveMenu").style.display="block";
+
 }
 
 function loadGame(){
 
-const raw=localStorage.getItem("gtavi_save_v07");
+const raw=localStorage.getItem("gtavi_save_v09")
+||localStorage.getItem("gtavi_save_v07");
 
-if(!raw)return showMessage("Chưa có dữ liệu lưu");
+if(!raw){
+
+return showMessage("Chưa có dữ liệu lưu");
+
+}
 
 try{
 
 const data=JSON.parse(raw);
 
 if(data.position){
+
 player.position.set(
+
 Number(data.position.x)||0,
+
 Number(data.position.y)||0,
+
 Number(data.position.z)||0
+
 );
+
 }
 
-money=Number.isFinite(Number(data.money))?Number(data.money):500;
-health=Number.isFinite(Number(data.health))?Number(data.health):100;
+money=Number.isFinite(Number(data.money))
+?Number(data.money)
+:500;
 
-inventory=Array.isArray(data.inventory)?data.inventory:[];
+health=Number.isFinite(Number(data.health))
+?Number(data.health)
+:100;
+
+inventory=Array.isArray(data.inventory)
+?data.inventory
+:[];
+
 outfit=Number(data.outfit)||0;
 
+if(data.backroomsReturnPoint){
+
+backroomsReturnPoint.set(
+
+Number(data.backroomsReturnPoint.x)||0,
+
+Number(data.backroomsReturnPoint.y)||0,
+
+Number(data.backroomsReturnPoint.z)||0
+
+);
+
+}
+
 updateMoney();
-showMessage("Đã tải dữ liệu");
+
+showMessage("Đã tải dữ liệu!");
 
 }catch(e){
+
 showMessage("Dữ liệu lưu bị lỗi");
-}
 
 }
 
-document.getElementById("saveButton").addEventListener("click",saveGame);
-document.getElementById("loadButton").addEventListener("click",loadGame);
+}
 
-document.getElementById("closeSave").addEventListener("click",()=>{
+document.getElementById("saveButton").addEventListener(
+"click",
+saveGame
+);
+
+document.getElementById("loadButton").addEventListener(
+"click",
+loadGame
+);
+
+document.getElementById("closeSave").addEventListener(
+"click",
+()=>{
+
 document.getElementById("saveMenu").style.display="none";
-});
 
-// MINIMAP
+}
+);
+
+
+// =====================================================
+// 39. MINIMAP
+// =====================================================
+
 const mapCanvas=document.getElementById("minimap");
+
 const mapCtx=mapCanvas.getContext("2d");
 
 function drawMinimap(){
@@ -1189,45 +2792,62 @@ const h=mapCanvas.height;
 
 mapCtx.clearRect(0,0,w,h);
 
-mapCtx.fillStyle="#284c3c";
+mapCtx.fillStyle=backroomsMode?"#887c42":"#284c3c";
+
 mapCtx.fillRect(0,0,w,h);
 
 mapCtx.strokeStyle="#888";
+
 mapCtx.lineWidth=7;
 
 for(let i=0;i<w;i+=26){
 
 mapCtx.beginPath();
+
 mapCtx.moveTo(i,0);
+
 mapCtx.lineTo(i,h);
+
 mapCtx.stroke();
 
 mapCtx.beginPath();
+
 mapCtx.moveTo(0,i);
+
 mapCtx.lineTo(w,i);
+
 mapCtx.stroke();
 
 }
 
-const pos=currentCar?currentCar.object.position:player.position;
+const pos=currentCar
+?currentCar.object.position
+:player.position;
 
 const px=w/2+pos.x*.18;
+
 const py=h/2+pos.z*.18;
 
 mapCtx.fillStyle="#ff3333";
+
 mapCtx.beginPath();
+
 mapCtx.arc(px,py,7,0,Math.PI*2);
+
 mapCtx.fill();
 
-if(missionActive){
+if(missionActive&&!backroomsMode){
 
 mapCtx.fillStyle="#ffcf48";
+
 mapCtx.beginPath();
 
 mapCtx.arc(
 w/2+missionTarget.x*.18,
 h/2+missionTarget.z*.18,
-6,0,Math.PI*2
+6,
+0,
+Math.PI*2
 );
 
 mapCtx.fill();
@@ -1236,7 +2856,11 @@ mapCtx.fill();
 
 }
 
-// MAIN LOOP
+
+// =====================================================
+// 40. MAIN LOOP
+// =====================================================
+
 const clock=new THREE.Clock();
 
 function animate(){
@@ -1252,12 +2876,15 @@ player.position.copy(currentCar.object.position);
 movePlayer(delta);
 
 verticalVelocity-=16*delta;
+
 player.position.y+=verticalVelocity*delta;
 
 if(player.position.y<=0){
 
 player.position.y=0;
+
 verticalVelocity=0;
+
 grounded=true;
 
 }
@@ -1265,13 +2892,32 @@ grounded=true;
 }
 
 updateNPCs(delta);
+
+updateNPCAvoidance(delta);
+
 updateCars(delta);
+
+updateCarBounces();
+
 updateMission();
+
 updateNPCModels();
+
+updateBackrooms();
+
+updateBackroomsLights(delta);
+
+updateBackroomsAtmosphere(delta);
+
 updateCamera();
+
 drawMinimap();
 
-if(playerMixer)playerMixer.update(delta);
+if(playerMixer){
+
+playerMixer.update(delta);
+
+}
 
 renderer.render(scene,camera);
 
@@ -1279,19 +2925,33 @@ renderer.render(scene,camera);
 
 renderer.setAnimationLoop(animate);
 
-// RESIZE
+
+// =====================================================
+// 41. RESIZE
+// =====================================================
+
 window.addEventListener("resize",()=>{
 
 camera.aspect=innerWidth/innerHeight;
+
 camera.updateProjectionMatrix();
 
-renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.35));
+renderer.setPixelRatio(
+Math.min(devicePixelRatio||1,1.35)
+);
+
 renderer.setSize(innerWidth,innerHeight);
 
 });
 
-// WEBGL
-renderer.domElement.addEventListener("webglcontextlost",e=>{
+
+// =====================================================
+// 42. WEBGL CONTEXT
+// =====================================================
+
+renderer.domElement.addEventListener(
+"webglcontextlost",
+e=>{
 
 e.preventDefault();
 
@@ -1299,11 +2959,17 @@ renderer.setAnimationLoop(null);
 
 showMessage("Mất kết nối WebGL. Hãy tải lại trang.");
 
-});
+}
+);
+
+
+// =====================================================
+// 43. START
+// =====================================================
 
 updateMoney();
 
-console.log("GTA VI FANMADE v0.8 READY!");
+console.log("GTA VI FANMADE v0.9 READY!");
 
 </script>
 </body>
